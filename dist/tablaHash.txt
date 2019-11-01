@@ -1,0 +1,23 @@
+digraph G {
+	nodesep=.05;
+	rankdir=LR;
+	node [shape=record,width=.1,height=.1];
+	node [width = 1.5];
+node0 [label = "<f0> 1|<f1> 2|<f2> 3|<f3> 4|<f4> 5|<f5> 6|<f6> 7|",height=2.5];
+node_0[label = "{<n>Juan123|MiContrasena|<p> }"];
+node0:f0 -> node_0:n;
+node_1[label = "{<n>Pedro456|Tres|<p> }"];
+node0:f1 -> node_1:n;
+node_1_L[label = "{<n>JuanPerez|nueco2|<p> }"];
+node_1:p -> node_1_L:n;
+node_2[label = "{<n>Ricardo123|Dos|<p> }"];
+node0:f2 -> node_2:n;
+node_2_L[label = "{<n>Dennis|cuaro|<p> }"];
+node_2:p -> node_2_L:n;
+node_4[label = "{<n>Pero|cuatro|<p> }"];
+node0:f4 -> node_4:n;
+node_4_L[label = "{<n>Luz|ped|<p> }"];
+node_4:p -> node_4_L:n;
+node_5[label = "{<n>Antinio|cinco|<p> }"];
+node0:f5 -> node_5:n;
+}
