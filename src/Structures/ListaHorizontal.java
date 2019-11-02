@@ -14,6 +14,7 @@ import Nodes.NodoContenido;
 public class ListaHorizontal {
     NodoContenido primero;
     NodoContenido ultimo;
+    Cabecera cabecera;
     public ListaHorizontal() {
         primero = null;
         ultimo = null;
@@ -32,7 +33,10 @@ public class ListaHorizontal {
         }
         else {
             if (nuevo.ruta!=null) {
+            
+                   
                 insertarAlFinal(nuevo);
+                
             }
         }
     }

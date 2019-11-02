@@ -30,6 +30,8 @@ public class EDD_2S2019_PY2_201701029 {
         matriz.insertar("usac","documents", "documents/usac");
         matriz.insertar("vendor","documents", "documents/vendor");
         matriz.insertar("","usac", "");
+        matriz.insertar("/","vendor", "prueba");
+        matriz.insertar("home","vendor", "hola");
         matriz.insertar("view","vendor", "vendor/view");
         matriz.insertar("","view", "");
         TablaHash tabla = new TablaHash();

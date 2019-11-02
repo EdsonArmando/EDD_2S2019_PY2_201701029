@@ -8,8 +8,10 @@ node[shape=record,style=filled]
 "Fila:vendor-1vendor"[label ="vendor" ,group = 1 ]
 "Fila:view-1view"[label ="view" ,group = 1 ]
 "COL:/-1/"[label ="/" ,group =2]
+"prueba-/vendor"[label ="prueba" ,group = 2 ]
 "COL:home-1home"[label ="home" ,group =3]
 "/home-home/"[label ="/home" ,group = 3 ]
+"hola-homevendor"[label ="hola" ,group = 3 ]
 "COL:documents-1documents"[label ="documents" ,group =4]
 "home/documents-documentshome"[label ="home/documents" ,group = 4 ]
 "COL:usac-1usac"[label ="usac" ,group =5]
@@ -24,7 +26,7 @@ node[shape=record,style=filled]
 {rank = same;"Fila:home-1home";"home/documents-documentshome";}
 {rank = same;"Fila:documents-1documents";"documents/usac-usacdocuments";"documents/vendor-vendordocuments";}
 {rank = same;"Fila:usac-1usac";}
-{rank = same;"Fila:vendor-1vendor";"vendor/view-viewvendor";}
+{rank = same;"Fila:vendor-1vendor";"prueba-/vendor";"hola-homevendor";"vendor/view-viewvendor";}
 {rank = same;"Fila:view-1view";}
 {rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:documents-1documents";"COL:usac-1usac";"COL:vendor-1vendor";"COL:view-1view";}
 
@@ -47,18 +49,26 @@ node[shape=record,style=filled]
 "documents/usac-usacdocuments"->"documents/vendor-vendordocuments"[dir=back]
 "Fila:usac-1usac"->"Fila:vendor-1vendor"
 "Fila:usac-1usac"->"Fila:vendor-1vendor"[dir=back]
-"Fila:vendor-1vendor"->"vendor/view-viewvendor"
-"Fila:vendor-1vendor"->"vendor/view-viewvendor"[dir=back]
+"Fila:vendor-1vendor"->"prueba-/vendor"
+"Fila:vendor-1vendor"->"prueba-/vendor"[dir=back]
 "Fila:vendor-1vendor"->"Fila:view-1view"
 "Fila:vendor-1vendor"->"Fila:view-1view"[dir=back]
+"prueba-/vendor"->"hola-homevendor"
+"prueba-/vendor"->"hola-homevendor"[dir=back]
+"hola-homevendor"->"vendor/view-viewvendor"
+"hola-homevendor"->"vendor/view-viewvendor"[dir=back]
 "RAIZ-1-1" -> "COL:/-1/"
 "RAIZ-1-1" -> "COL:/-1/"[dir=back]
+"COL:/-1/"->"prueba-/vendor"
+"COL:/-1/"->"prueba-/vendor"[dir=back]
 "COL:/-1/"->"COL:home-1home"
 "COL:/-1/"->"COL:home-1home"[dir=back]
 "COL:home-1home"->"/home-home/"
 "COL:home-1home"->"/home-home/"[dir=back]
 "COL:home-1home"->"COL:documents-1documents"
 "COL:home-1home"->"COL:documents-1documents"[dir=back]
+"/home-home/"->"hola-homevendor"
+"/home-home/"->"hola-homevendor"[dir=back]
 "COL:documents-1documents"->"home/documents-documentshome"
 "COL:documents-1documents"->"home/documents-documentshome"[dir=back]
 "COL:documents-1documents"->"COL:usac-1usac"

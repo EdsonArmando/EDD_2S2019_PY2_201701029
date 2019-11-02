@@ -82,8 +82,8 @@ public class MatrizDispersa {
             while(temp2!=null){
                 rank+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\";";
                 try{
-                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.derech.ruta+"-"+temp2.derech.rutax+temp2.rutay+"\"\n";
-                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.derech.ruta+"-"+temp2.derech.rutax+temp2.rutay+"\"[dir=back]\n";
+                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.derech.ruta+"-"+temp2.derech.rutax+temp2.derech.rutay+"\"\n";
+                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.derech.ruta+"-"+temp2.derech.rutax+temp2.derech.rutay+"\"[dir=back]\n";
                 }catch(Exception e){}
                 temp2 = temp2.derech;
             }
@@ -118,8 +118,8 @@ public class MatrizDispersa {
             while(temp2!=null){
                 file.write("\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\"[label =\""+temp2.ruta+"\" ,group = "+String.valueOf(cont)+" ]\n");
                 try{
-                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.abajo.ruta+"-"+temp2.abajo.rutax+temp2.rutay+"\"\n";
-                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.abajo.ruta+"-"+temp2.abajo.rutax+temp2.rutay+"\"dir=back]\n";
+                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.abajo.ruta+"-"+temp2.abajo.rutax+temp2.abajo.rutay+"\"\n";
+                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.abajo.ruta+"-"+temp2.abajo.rutax+temp2.abajo.rutay+"\"[dir=back]\n";
                 }catch(Exception e){}
                 temp2=temp2.abajo;
             }
