@@ -1,0 +1,55 @@
+digraph Grafica { 
+node[shape=record,style=filled] 
+"RAIZ-1-1"[label ="{RAIZ}",group = 1]
+ "Fila:/-1/"[label ="/" ,group = 1 ]
+"Fila:home-1home"[label ="home" ,group = 1 ]
+"Fila:documents-1documents"[label ="documents" ,group = 1 ]
+"Fila:usac-1usac"[label ="usac" ,group = 1 ]
+"Fila:vendor-1vendor"[label ="vendor" ,group = 1 ]
+"Fila:view-1view"[label ="view" ,group = 1 ]
+"COL:/-1/"[label ="/" ,group =2]
+"COL:home-1home"[label ="home" ,group =3]
+"/home-home/"[label ="/home" ,group = 3 ]
+"COL:documents-1documents"[label ="documents" ,group =4]
+"home/documents-documentshome"[label ="home/documents" ,group = 4 ]
+"COL:usac-1usac"[label ="usac" ,group =5]
+"documents/usac-usacdocuments"[label ="documents/usac" ,group = 5 ]
+"COL:vendor-1vendor"[label ="vendor" ,group =6]
+"documents/vendor-vendordocuments"[label ="documents/vendor" ,group = 6 ]
+"COL:view-1view"[label ="view" ,group =7]
+"vendor/view-viewvendor"[label ="vendor/view" ,group = 7 ]
+
+
+{rank = same;"Fila:/-1/";"/home-home/";}
+{rank = same;"Fila:home-1home";"home/documents-documentshome";}
+{rank = same;"Fila:documents-1documents";"documents/usac-usacdocuments";"documents/vendor-vendordocuments";}
+{rank = same;"Fila:usac-1usac";}
+{rank = same;"Fila:vendor-1vendor";"vendor/view-viewvendor";}
+{rank = same;"Fila:view-1view";}
+{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:documents-1documents";"COL:usac-1usac";"COL:vendor-1vendor";"COL:view-1view";}
+
+
+"RAIZ-1-1" -> "Fila:/-1/"
+"Fila:/-1/"->"/home-home/"
+"Fila:/-1/"->"Fila:home-1home"
+"Fila:home-1home"->"home/documents-documentshome"
+"Fila:home-1home"->"Fila:documents-1documents"
+"Fila:documents-1documents"->"documents/usac-usacdocuments"
+"Fila:documents-1documents"->"Fila:usac-1usac"
+"documents/usac-usacdocuments"->"documents/vendor-vendordocuments"
+"Fila:usac-1usac"->"Fila:vendor-1vendor"
+"Fila:vendor-1vendor"->"vendor/view-viewvendor"
+"Fila:vendor-1vendor"->"Fila:view-1view"
+"RAIZ-1-1" -> "COL:/-1/"
+"COL:/-1/"->"COL:home-1home"
+"COL:home-1home"->"/home-home/"
+"COL:home-1home"->"COL:documents-1documents"
+"COL:documents-1documents"->"home/documents-documentshome"
+"COL:documents-1documents"->"COL:usac-1usac"
+"COL:usac-1usac"->"documents/usac-usacdocuments"
+"COL:usac-1usac"->"COL:vendor-1vendor"
+"COL:vendor-1vendor"->"documents/vendor-vendordocuments"
+"COL:vendor-1vendor"->"COL:view-1view"
+"COL:view-1view"->"vendor/view-viewvendor"
+
+}

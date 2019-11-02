@@ -8,6 +8,8 @@ package Structures;
 import Nodes.NodoCabecera;
 import Nodes.NodoContenido;
 import Nodes.NodoLateral;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -45,4 +47,83 @@ public class MatrizDispersa {
         //cout << "Inserto" << color << "en" << x << " ," << y << endl;
         /*Se inserto el nodo*/
     }
+    public void graficarMatriz() throws IOException{
+        int cont = 2;
+        String relaciones="";
+        NodoLateral temp = listlat.primero;
+        NodoCabecera temp1 = listaCab.primero;
+        NodoContenido temp2;
+        FileWriter file = new FileWriter("Matriz.dot");
+        String rank="";
+        file.write("digraph Grafica { \n" +
+        "node[shape=record,style=filled] \n" +
+        "\"RAIZ-1-1\"[label =\"{RAIZ}\",group = 1]\n ");
+        rank = "{rank = same;";
+        while (temp != null){
+            temp2 = temp.fila.primero;
+            if(cont==2){
+                relaciones+="\"RAIZ-1-1\" -> "+"\"Fila:"+temp.nombre+"-1"+temp.nombre+"\"\n";
+                cont++;
+            }
+            try{
+                relaciones+="\"Fila:"+temp.nombre+"-1"+temp.nombre+"\""+"->"+"\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\"\n";
+                }catch(Exception e){}
+            if (temp.siguiente !=null){
+                relaciones+="\"Fila:"+temp.nombre+"-1"+temp.nombre+"\""+"->"+"\"Fila:"+temp.siguiente.nombre+"-1"+temp.siguiente.nombre+"\"\n";
+            
+            }
+            
+            rank+="\"Fila:"+temp.nombre+"-1"+temp.nombre+"\";";
+            file.write("\"Fila:"+temp.nombre+"-1"+temp.nombre+"\"[label =\""+temp.nombre+"\" ,group = 1 ]\n");
+            
+           
+            while(temp2!=null){
+                rank+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\";";
+                try{
+                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.derech.ruta+"-"+temp2.derech.rutax+temp2.rutay+"\"\n";
+                }catch(Exception e){}
+                temp2 = temp2.derech;
+            }
+            temp = temp.siguiente;
+            rank+="}\n";
+            if (temp!=null){
+                rank+="{rank = same;";
+            }
+        }
+        temp2=null;
+        rank+="{rank = same;\"RAIZ-1-1\";";
+        cont--;
+         while (temp1 != null){
+             temp2=temp1.colum.primero;
+             if(cont==2){
+                relaciones+="\"RAIZ-1-1\" -> "+"\"COL:"+temp1.nombre+"-1"+temp1.nombre+"\"\n";
+            }
+            if(temp2!=null){
+                   relaciones+="\"COL:"+temp1.nombre+"-1"+temp1.nombre+"\""+"->"+"\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\"\n";
+               }
+            if (temp1.siguiente !=null){
+                relaciones+="\"COL:"+temp1.nombre+"-1"+temp1.nombre+"\""+"->"+"\"COL:"+temp1.siguiente.nombre+"-1"+temp1.siguiente.nombre+"\"\n";
+            }
+            
+            rank+="\"COL:"+temp1.nombre+"-1"+temp1.nombre+"\";";
+            file.write("\"COL:"+temp1.nombre+"-1"+temp1.nombre+"\"[label =\""+temp1.nombre+"\" ,group ="+String.valueOf(cont)+"]\n");
+            
+            
+            while(temp2!=null){
+                file.write("\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\"[label =\""+temp2.ruta+"\" ,group = "+String.valueOf(cont)+" ]\n");
+                try{
+                    relaciones+="\""+temp2.ruta+"-"+temp2.rutax+temp2.rutay+"\""+"->"+"\""+temp2.abajo.ruta+"-"+temp2.abajo.rutax+temp2.rutay+"\"\n";
+                }catch(Exception e){}
+                temp2=temp2.abajo;
+            }
+            cont++;
+            temp1 = temp1.siguiente;
+        }
+        rank+="}\n";
+        file.write("\n\n");
+        file.write(rank);
+         file.write("\n\n");
+        file.write(relaciones+"\n}");
+        file.close();
+    } 
 }

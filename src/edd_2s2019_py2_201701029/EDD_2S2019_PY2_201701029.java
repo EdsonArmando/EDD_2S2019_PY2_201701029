@@ -48,6 +48,8 @@ public class EDD_2S2019_PY2_201701029 {
         tabla.add("Adimn","Dos");
         tabla.recorrerHah();
         tabla.graphTable();
+        System.out.println("-------");
+        matriz.graficarMatriz();
         Login login = new Login();
         login.setVisible(true);
         login.setLocationRelativeTo(null);

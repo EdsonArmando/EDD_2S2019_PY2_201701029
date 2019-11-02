@@ -12,7 +12,7 @@ import Nodes.NodoLateral;
  * @author EG
  */
 public class Lateral {
-    NodoLateral primero;
+    public NodoLateral primero;
     NodoLateral ultimo;
     public Lateral(){
         primero = null;
