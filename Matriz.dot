@@ -1,12 +1,13 @@
 digraph Grafica { 
 node[shape=record,style=filled] 
 "RAIZ-1-1"[label ="{RAIZ}",group = 1]
- "Fila:/-1/"[label ="/" ,group = 1 ]
+ "Fila:usac-1usac"[label ="usac" ,group = 1 ]
+"Fila:/-1/"[label ="/" ,group = 1 ]
 "Fila:home-1home"[label ="home" ,group = 1 ]
 "Fila:documents-1documents"[label ="documents" ,group = 1 ]
-"Fila:usac-1usac"[label ="usac" ,group = 1 ]
 "Fila:vendor-1vendor"[label ="vendor" ,group = 1 ]
 "Fila:view-1view"[label ="view" ,group = 1 ]
+"Fila:cuatro-1cuatro"[label ="cuatro" ,group = 1 ]
 "COL:/-1/"[label ="/" ,group =2]
 "prueba-/vendor"[label ="prueba" ,group = 2 ]
 "COL:home-1home"[label ="home" ,group =3]
@@ -20,19 +21,26 @@ node[shape=record,style=filled]
 "documents/vendor-vendordocuments"[label ="documents/vendor" ,group = 6 ]
 "COL:view-1view"[label ="view" ,group =7]
 "vendor/view-viewvendor"[label ="vendor/view" ,group = 7 ]
+"pru-viewview"[label ="pru" ,group = 7 ]
+"COL:dos-1dos"[label ="dos" ,group =8]
+"logica-dosvendor"[label ="logica" ,group = 8 ]
+"Edson-doscuatro"[label ="Edson" ,group = 8 ]
 
 
+{rank = same;"Fila:usac-1usac";}
 {rank = same;"Fila:/-1/";"/home-home/";}
 {rank = same;"Fila:home-1home";"home/documents-documentshome";}
 {rank = same;"Fila:documents-1documents";"documents/usac-usacdocuments";"documents/vendor-vendordocuments";}
-{rank = same;"Fila:usac-1usac";}
-{rank = same;"Fila:vendor-1vendor";"prueba-/vendor";"hola-homevendor";"vendor/view-viewvendor";}
-{rank = same;"Fila:view-1view";}
-{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:documents-1documents";"COL:usac-1usac";"COL:vendor-1vendor";"COL:view-1view";}
+{rank = same;"Fila:vendor-1vendor";"prueba-/vendor";"hola-homevendor";"vendor/view-viewvendor";"logica-dosvendor";}
+{rank = same;"Fila:view-1view";"pru-viewview";}
+{rank = same;"Fila:cuatro-1cuatro";"Edson-doscuatro";}
+{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:documents-1documents";"COL:usac-1usac";"COL:vendor-1vendor";"COL:view-1view";"COL:dos-1dos";}
 
 
-"RAIZ-1-1" -> "Fila:/-1/"
-"RAIZ-1-1" -> "Fila:/-1/"[dir=back]
+"RAIZ-1-1" -> "Fila:usac-1usac"
+"RAIZ-1-1" -> "Fila:usac-1usac"[dir=back]
+"Fila:usac-1usac"->"Fila:/-1/"
+"Fila:usac-1usac"->"Fila:/-1/"[dir=back]
 "Fila:/-1/"->"/home-home/"
 "Fila:/-1/"->"/home-home/"[dir=back]
 "Fila:/-1/"->"Fila:home-1home"
@@ -43,12 +51,10 @@ node[shape=record,style=filled]
 "Fila:home-1home"->"Fila:documents-1documents"[dir=back]
 "Fila:documents-1documents"->"documents/usac-usacdocuments"
 "Fila:documents-1documents"->"documents/usac-usacdocuments"[dir=back]
-"Fila:documents-1documents"->"Fila:usac-1usac"
-"Fila:documents-1documents"->"Fila:usac-1usac"[dir=back]
+"Fila:documents-1documents"->"Fila:vendor-1vendor"
+"Fila:documents-1documents"->"Fila:vendor-1vendor"[dir=back]
 "documents/usac-usacdocuments"->"documents/vendor-vendordocuments"
 "documents/usac-usacdocuments"->"documents/vendor-vendordocuments"[dir=back]
-"Fila:usac-1usac"->"Fila:vendor-1vendor"
-"Fila:usac-1usac"->"Fila:vendor-1vendor"[dir=back]
 "Fila:vendor-1vendor"->"prueba-/vendor"
 "Fila:vendor-1vendor"->"prueba-/vendor"[dir=back]
 "Fila:vendor-1vendor"->"Fila:view-1view"
@@ -57,6 +63,14 @@ node[shape=record,style=filled]
 "prueba-/vendor"->"hola-homevendor"[dir=back]
 "hola-homevendor"->"vendor/view-viewvendor"
 "hola-homevendor"->"vendor/view-viewvendor"[dir=back]
+"vendor/view-viewvendor"->"logica-dosvendor"
+"vendor/view-viewvendor"->"logica-dosvendor"[dir=back]
+"Fila:view-1view"->"pru-viewview"
+"Fila:view-1view"->"pru-viewview"[dir=back]
+"Fila:view-1view"->"Fila:cuatro-1cuatro"
+"Fila:view-1view"->"Fila:cuatro-1cuatro"[dir=back]
+"Fila:cuatro-1cuatro"->"Edson-doscuatro"
+"Fila:cuatro-1cuatro"->"Edson-doscuatro"[dir=back]
 "RAIZ-1-1" -> "COL:/-1/"
 "RAIZ-1-1" -> "COL:/-1/"[dir=back]
 "COL:/-1/"->"prueba-/vendor"
@@ -83,5 +97,13 @@ node[shape=record,style=filled]
 "COL:vendor-1vendor"->"COL:view-1view"[dir=back]
 "COL:view-1view"->"vendor/view-viewvendor"
 "COL:view-1view"->"vendor/view-viewvendor"[dir=back]
+"COL:view-1view"->"COL:dos-1dos"
+"COL:view-1view"->"COL:dos-1dos"[dir=back]
+"vendor/view-viewvendor"->"pru-viewview"
+"vendor/view-viewvendor"->"pru-viewview"[dir=back]
+"COL:dos-1dos"->"logica-dosvendor"
+"COL:dos-1dos"->"logica-dosvendor"[dir=back]
+"logica-dosvendor"->"Edson-doscuatro"
+"logica-dosvendor"->"Edson-doscuatro"[dir=back]
 
 }

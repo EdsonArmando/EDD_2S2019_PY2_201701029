@@ -25,6 +25,16 @@ public class CollisionList {
             return false;
         }
     }
+    public boolean login(String username , String password){
+        NodeHash temp = primero;
+        while(temp!=null){
+            if(temp.nombreUsuario.equals(username) && temp.contrasenia.equals(password)){
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
     public void AddNode(NodeHash newNode){
         if(primero == null){
             ultimo = newNode;

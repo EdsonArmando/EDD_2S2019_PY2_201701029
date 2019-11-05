@@ -5,21 +5,29 @@
  */
 package Views;
 
+import Structures.TablaHash;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author EG
  */
 public class Login extends javax.swing.JFrame {
-
+    public TablaHash tabla = new TablaHash();
+    File directorio;
+    MenuUsuario Menu;
     /**
      * Creates new form Login
      */
+    
     public Login() {
+        
         initComponents();
     }
 
@@ -118,17 +126,72 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        try {
+        
+        /*try {
             Runtime.getRuntime().exec("cmd /c Hash.png", null, new File(System.getProperty("user.dir")));
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_LoginActionPerformed
+        }*/
+        String username = idUsername.getText();
+        String password = idPassword.getText();
+        boolean log = tabla.Login(username, password);
+        if(log){
+            Menu = new MenuUsuario(this,true);
+            Menu.idBienvenida.setText("Bienvenido al sistema " + username);
+            Menu.idCrear.addActionListener(new ActionListener(){
 
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String ruta = JOptionPane.showInputDialog("Ingrese el nombre de la carpeta");
+                    directorio = new File(System.getProperty("user.dir")+"\\"+"raiz_"+username+"\\"+ruta);
+                    if (!directorio.exists()) {
+                            if (directorio.mkdirs()) {
+                                System.out.println("Directorio creado");
+                            } else {
+                                System.out.println("Error al crear directorio");
+                            }
+                        }
+                    }
+
+            });
+            
+            Menu.setVisible(true);
+            Menu.setLocationRelativeTo(null);
+        }else{
+            JOptionPane.showMessageDialog(null,"Verifique sus Credenciales");
+        }
+        
+        
+    }//GEN-LAST:event_LoginActionPerformed
+    public void manejoCarpetasyArchivos(){
+    }
+    public void Registro(){
+        Registro1 nuevo = new Registro1(this,true);
+        nuevo.Acept.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = nuevo.idUsername.getText();
+                String password = nuevo.idPassword.getText();
+                tabla.add(username, password);
+                directorio = new File(System.getProperty("user.dir")+"\\"+"raiz_"+username);
+                if (!directorio.exists()) {
+                        if (directorio.mkdirs()) {
+                            System.out.println("Directorio creado");
+                        } else {
+                            System.out.println("Error al crear directorio");
+                        }
+                    }
+                JOptionPane.showMessageDialog(null,"Bienvenido al sistema " + username);
+                nuevo.dispose();
+            }
+        });
+        nuevo.setLocationRelativeTo(this);
+        nuevo.setSize(500,500);
+        nuevo.setVisible(true);
+        
+    }
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-        Registro regi = new Registro();
-        Login.repaint();
-        Login.add(regi);
+        Registro();
     }//GEN-LAST:event_RegistrarActionPerformed
 
     /**

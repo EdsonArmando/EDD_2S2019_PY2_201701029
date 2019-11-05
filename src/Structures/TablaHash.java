@@ -5,6 +5,7 @@
  */
 package Structures;
 
+import Nodes.NodeAVL;
 import Nodes.NodeHash;
 import java.io.File;
 import java.io.FileWriter;
@@ -24,7 +25,6 @@ public class TablaHash {
     private NodeHash[] entries = new NodeHash[size];
    //Metodo para buscar un valor dentor de la tabla Hash
     public Integer buscar(){
-        
         return null;
     }
     /*
@@ -67,6 +67,22 @@ public class TablaHash {
             NodeHash temp = entries[indice];
             temp.list.AddNode(hashEntry);
         }
+    }
+    /*
+    Metodo utilizado por el Login
+    */
+    public boolean Login(String username, String password){
+        int indice = hashMejor(username);
+        NodeHash  temp = entries[indice];
+        if(temp != null){
+            if(temp.nombreUsuario.equals(username) && temp.contrasenia.equals(password)){
+                return true;
+                
+            }else{
+                return temp.list.login(username, password);
+            }
+        }
+        return false;
     }
     /*
     Obtener nodoHash de la tabla
