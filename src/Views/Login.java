@@ -180,6 +180,7 @@ public class Login extends javax.swing.JFrame {
         carpetaPadre=hijo;
         Menu.idBienvenida.setText("Bienvenido al sistema " + username);
         Menu.idDirectorio.setText("..\\"+padre+"\\"+hijo);
+        Menu.idMasivaUsuario.setVisible(false);
         LinkedList<String> listado = listadoArchivos(nodoMatriz);
         if (listado == null || listado.size() == 0) {
             System.out.println("No hay elementos dentro de la carpeta actual");
@@ -296,7 +297,63 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
                 nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta);
-                Menu.panelFile.add(returnJlabel(ruta));
+                JLabel archivo = new JLabel();
+                archivo.setToolTipText(ruta);
+                archivo.setName(ruta);
+                archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file2.png")));
+                archivo.setText(ruta);
+                archivo.setHorizontalTextPosition(JLabel.CENTER);
+                archivo.setVerticalTextPosition(JLabel.BOTTOM);
+                archivo.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        contClik+=1;
+                        nombreFile = archivo.getName();
+                        if(contClik==2){    
+                            try {
+                                contClik=0; 
+                                MenuUser(username,Menu.nombbre(),nombreFile,carpeta);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+
+                    }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+
+                });
+                /*if(cont==4){
+                 y+=13;
+                 x=0;
+                 cont=0;
+                 }*/
+                archivo.setBounds(x, y, 50, 70);
+                y += 75;
+                if (y > 400) {
+                    y = 0;
+                    x += 60;
+                }
+                Menu.panelFile.add(archivo);
                 Menu.panelFile.repaint();
             }
         });
@@ -320,7 +377,7 @@ public class Login extends javax.swing.JFrame {
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(ruta);
                 archivo.setName(ruta);
-                archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file2.png")));
+                archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file.png")));
                 archivo.setText(ruta);
                 archivo.setHorizontalTextPosition(JLabel.CENTER);
                 archivo.setVerticalTextPosition(JLabel.BOTTOM);
@@ -380,6 +437,17 @@ public class Login extends javax.swing.JFrame {
             }
 
         });
+        if(username.equals("admin")){
+            Menu.idMasivaUsuario.setVisible(true);
+            Menu.idMasivaUsuario.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    cargaMasivaUsuarios(JOptionPane.showInputDialog("Ingrese la ruta de csv"));
+                }
+            
+            });
+        }
         Menu.setVisible(true);
         Menu.setLocationRelativeTo(null);
     }
@@ -476,7 +544,6 @@ public class Login extends javax.swing.JFrame {
             public void mouseExited(MouseEvent e) {
 
             }
-
         });
 
         /*if(cont==4){
@@ -490,12 +557,10 @@ public class Login extends javax.swing.JFrame {
             y = 0;
             x += 60;
         }
-
         return archivo;
-        
     }
-    
-    public void manejoCarpetasyArchivos() {
+    public void cargaMasivaUsuarios(String ruta) {
+        System.out.println(ruta);
     }
     public void Registro() {
         Registro1 nuevo = new Registro1(this, true);
