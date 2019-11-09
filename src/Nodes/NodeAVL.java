@@ -20,8 +20,11 @@ public class NodeAVL {
     public String propietario;
     public NodeAVL izquierda;
     public NodeAVL derecha;
-    public NodeAVL(String key){
+    public boolean ieCarpeta;
+    public NodeAVL(String key,String contenido, boolean esCarpeta){
         this.nombreArchivo = key;
+        this.ieCarpeta = esCarpeta;
+        this.contenido = contenido;
         this.alt = 1;
     }
 }

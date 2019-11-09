@@ -59,6 +59,7 @@ public  class MenuUsuario extends java.awt.Dialog {
         idArchSubir = new javax.swing.JButton();
         idAvl = new javax.swing.JButton();
         idMatriz = new javax.swing.JButton();
+        idMasivaArch = new javax.swing.JButton();
         panelFile = new javax.swing.JPanel();
         idDirectorio = new javax.swing.JLabel();
 
@@ -140,6 +141,8 @@ public  class MenuUsuario extends java.awt.Dialog {
 
         idMatriz.setText("Matriz");
 
+        idMasivaArch.setText("Masiva");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -147,6 +150,9 @@ public  class MenuUsuario extends java.awt.Dialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(idMasivaArch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(idArchCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(idArchModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addComponent(idArchEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -163,19 +169,21 @@ public  class MenuUsuario extends java.awt.Dialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idArchCrear)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(idArchModificar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(idArchEliminar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(idArchSubir)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(idAvl)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(idMatriz)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(idMasivaArch)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         panelFile.setLayout(null);
@@ -272,6 +280,7 @@ public  class MenuUsuario extends java.awt.Dialog {
     public javax.swing.JButton idCrear;
     public javax.swing.JLabel idDirectorio;
     public javax.swing.JButton idEliminar;
+    public javax.swing.JButton idMasivaArch;
     public javax.swing.JButton idMasivaUsuario;
     public javax.swing.JButton idMatriz;
     public javax.swing.JButton idModificar;

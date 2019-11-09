@@ -31,16 +31,10 @@ public class EDD_2S2019_PY2_201701029 {
         login.tabla.add("Juan123","MiContrasena");
         login.tabla.add("Ricardo123","Dos456212");
         login.tabla.add("Pedro456","Tres123456");
-        login.tabla.add("Edson","uno123456");
         login.tabla.add("Antinio","cinco123456");
         login.tabla.add("Pero","cuatro123456");
-        login.tabla.add("JuanPerez","nueco2123456");
-        login.tabla.add("Luz","ped123456");
-        login.tabla.add("Cris","contra123");
-        login.tabla.add("Yo","solo123456");
-        login.tabla.add("Ella","Puedo123456");
-        login.tabla.add("Respirar","Null123456");
-        login.tabla.add("Adimn","Dos123456");
+        login.tabla.add("admin","admin123456");
+
         login.tabla.graphTable();
         login.setVisible(true);
         login.setLocationRelativeTo(null);

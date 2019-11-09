@@ -20,7 +20,7 @@ public class AVL {
     String inicio = "digraph grafica{nrankdir=TB;\n label=\"Arbol AVL \"; \n node [shape = record, style=filled, fillcolor=seashell2];\n";
     String nodes="";
     String rela= "";
-    public LinkedList<String> tempo = new LinkedList<>();
+    public LinkedList<NodeAVL> tempo = new LinkedList<>();
     NodeAVL izquierdaRotate(NodeAVL x) { 
         NodeAVL y = x.derecha; 
         NodeAVL T2 = y.izquierda; 
@@ -71,15 +71,15 @@ public class AVL {
         }
         return node.alt;
     }
-    public NodeAVL insert(NodeAVL node, String key) { 
+    public NodeAVL insert(NodeAVL node, String key, String contenido, boolean esCarpeta) { 
         /* 1.  Perform the normal BST insertion */
         if (node == null) 
-            return (new NodeAVL(key)); 
+            return (new NodeAVL(key,contenido,esCarpeta)); 
   
         if (retornInt(key) < retornInt(node.nombreArchivo)) 
-            node.izquierda = insert(node.izquierda, key); 
+            node.izquierda = insert(node.izquierda, key,contenido,esCarpeta); 
         else if (retornInt(key) > retornInt(node.nombreArchivo)) 
-            node.derecha = insert(node.derecha, key); 
+            node.derecha = insert(node.derecha, key,contenido,esCarpeta); 
         else // Duplicate keys not allowed 
             return node; 
         /* 2. Update height of this ancestor node */
@@ -124,19 +124,19 @@ public class AVL {
     }
     public void reco(NodeAVL root){
         if(root!=null){
-            tempo.add(root.nombreArchivo);
+            tempo.add(root);
             reco(root.izquierda);
             reco(root.derecha);
         }
     }
-    public LinkedList<String> devLista(){
+    public LinkedList<NodeAVL> devLista(){
         return this.tempo;
     };
     
     public void graphAVL(NodeAVL root){
         
         if (root != null){
-            String data = "Carne: "+String.valueOf(root.nombreArchivo)+"\\n"+" Nombre: " + root.nombreArchivo +"\\n"+" ALT: " + String.valueOf(root.alt);
+            String data = "Carne: "+String.valueOf(root.nombreArchivo)+"\\n"+" Nombre: " + root.nombreArchivo +"\\n"+" ALT: " + String.valueOf(root.alt)+"\\n"+" Contenido: " + String.valueOf(root.contenido);
             nodes +="\"nodo" + String.valueOf(root.nombreArchivo) + "\" " + "[ label = \"<C0>|"+data+"|<C1>\"];\n";
             if(root.izquierda != null){
                 rela += "\"nodo" + String.valueOf(root.nombreArchivo) + "\":C0->" + "\"nodo" + String.valueOf(root.izquierda.nombreArchivo) + "\"\n";
