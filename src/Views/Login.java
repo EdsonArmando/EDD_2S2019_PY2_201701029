@@ -1,36 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Views;
 
+package Views;
+import Nodes.NodeHash;
+import Nodes.NodoContenido;
 import Structures.TablaHash;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import javax.swing.JPanel;
 /**
  *
  * @author EG
  */
 public class Login extends javax.swing.JFrame {
     public TablaHash tabla = new TablaHash();
-    File directorio;
-    MenuUsuario Menu;
+    private File carpeta;
+    private String subCarpeta="/";
+    private String username="";
+    private String carpetaPadre="home";
+    private int contClik=0;
+    private String nombreFile = "-";
+    private File directorio;
+    private String name="";
+    private int x = 0;
+    private int y = 0;
+    private int cont=0;
     /**
      * Creates new form Login
      */
-    
     public Login() {
-        
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,74 +142,388 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        
+        x=0;
+        y=0;
         /*try {
-            Runtime.getRuntime().exec("cmd /c Hash.png", null, new File(System.getProperty("user.dir")));
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        String username = idUsername.getText();
+         Runtime.getRuntime().exec("cmd /c Hash.png", null, new File(System.getProperty("user.dir")));
+         } catch (IOException ex) {
+         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
+        username = idUsername.getText();
         String password = idPassword.getText();
         boolean log = tabla.Login(username, password);
-        if(log){
-            Menu = new MenuUsuario(this,true);
-            Menu.idBienvenida.setText("Bienvenido al sistema " + username);
-            Menu.idCrear.addActionListener(new ActionListener(){
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String ruta = JOptionPane.showInputDialog("Ingrese el nombre de la carpeta");
-                    directorio = new File(System.getProperty("user.dir")+"\\"+"raiz_"+username+"\\"+ruta);
-                    if (!directorio.exists()) {
-                            if (directorio.mkdirs()) {
-                                System.out.println("Directorio creado");
-                            } else {
-                                System.out.println("Error al crear directorio");
+        if (log) {
+            try {
+                carpeta = new File(System.getProperty("user.dir")+"\\raiz_" + username);
+                MenuUser(username,"/","home",carpeta);
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifique sus Credenciales");
+        }
+    }//GEN-LAST:event_LoginActionPerformed
+    public LinkedList<String> listadoArchivos(NodoContenido  listado){
+        listado.avl.tempo.clear();
+        listado.avl.reco(listado.raiz);
+        LinkedList<String> nuevo = listado.avl.devLista();
+        return nuevo;
+    }
+    public void MenuUser(String username,String padre,String hijo,File carpeta) throws IOException, InterruptedException {
+        x=0;
+        y=0;
+        MenuUsuario Menu =  new MenuUsuario(this, hijo);
+        NodeHash temporal = tabla.getNodeHash(username);
+        NodoContenido nodoMatriz = temporal.matrix.returnNodoMatriz(padre, hijo, padre+"/"+hijo);
+        carpetaPadre=hijo;
+        Menu.idBienvenida.setText("Bienvenido al sistema " + username);
+        Menu.idDirectorio.setText("..\\"+padre+"\\"+hijo);
+        LinkedList<String> listado = listadoArchivos(nodoMatriz);
+        if (listado == null || listado.size() == 0) {
+            System.out.println("No hay elementos dentro de la carpeta actual");
+        } else {
+            for (int i = 0; i < listado.size(); i++) {
+                JLabel archivo = new JLabel();
+                archivo.setToolTipText(listado.get(i));
+                archivo.setName(listado.get(i));
+                archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file2.png")));
+                archivo.setText(listado.get(i));
+                archivo.setHorizontalTextPosition(JLabel.CENTER);
+                archivo.setVerticalTextPosition(JLabel.BOTTOM);
+                archivo.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        contClik+=1;
+                        nombreFile = archivo.getName();
+                        if(contClik==2){    
+                            try {
+                                contClik=0; 
+                                MenuUser(username,Menu.nombbre(),nombreFile,carpeta);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
+
+                    }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
                     }
 
-            });
-            
-            Menu.setVisible(true);
-            Menu.setLocationRelativeTo(null);
-        }else{
-            JOptionPane.showMessageDialog(null,"Verifique sus Credenciales");
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+
+                });
+                archivo.setBounds(x, y, 50, 70);
+                y += 75;
+                if (y > 400) {
+                    y = 0;
+                    x += 60;
+                }
+                Menu.panelFile.add(archivo);
+            }
         }
-        
-        
-    }//GEN-LAST:event_LoginActionPerformed
-    public void manejoCarpetasyArchivos(){
+        Menu.idEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EliminarCarpeta(username,nombreFile,carpeta);
+                Menu.panelFile.removeAll();
+                LinkedList<String> listado = listadoArchivos(nodoMatriz);
+                if (listado == null || listado.size() == 0) {
+                    System.out.println("No hay elementos dentro de la carpeta actual");
+                    return;
+                } else {
+                    x=0;
+                    y=0;
+                    for (int i = 0; i < listado.size(); i++) {
+                        Menu.panelFile.add(returnJlabel(listado.get(i)));
+                    }
+                }
+                Menu.panelFile.repaint();
+            }
+        });
+        Menu.idMatriz.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    temporal.matrix.graficarMatriz();
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        Menu.idArchEliminar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    EliminarArchivo(username,nombreFile,carpeta);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Menu.panelFile.removeAll();
+                LinkedList<String> listado = listadoArchivos(nodoMatriz);
+                if (listado == null || listado.size() == 0) {
+                    System.out.println("No hay elementos dentro de la carpeta actual");
+                    return;
+                } else {
+                    x=0;
+                    y=0;
+                    for (int i = 0; i < listado.size(); i++) {
+                        Menu.panelFile.add(returnJlabel(listado.get(i)));
+                    }
+                }
+                Menu.panelFile.repaint();
+            }
+        });
+        Menu.idArchCrear.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
+                nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta);
+                Menu.panelFile.add(returnJlabel(ruta));
+                Menu.panelFile.repaint();
+            }
+        });
+        Menu.idAvl.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    nodoMatriz.avl.graphAVL(nodoMatriz.raiz);
+                    nodoMatriz.avl.importImage();
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        Menu.idCrear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ruta = JOptionPane.showInputDialog("Ingrese el nombre de la carpeta");
+                temporal.matrix.insertar(hijo, ruta, hijo+"/"+ruta);
+                nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta);
+                JLabel archivo = new JLabel();
+                archivo.setToolTipText(ruta);
+                archivo.setName(ruta);
+                archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file2.png")));
+                archivo.setText(ruta);
+                archivo.setHorizontalTextPosition(JLabel.CENTER);
+                archivo.setVerticalTextPosition(JLabel.BOTTOM);
+                archivo.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        contClik+=1;
+                        nombreFile = archivo.getName();
+                        if(contClik==2){    
+                            try {
+                                contClik=0; 
+                                MenuUser(username,Menu.nombbre(),nombreFile,carpeta);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+
+                    }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+
+                });
+
+                /*if(cont==4){
+                 y+=13;
+                 x=0;
+                 cont=0;
+                 }*/
+                archivo.setBounds(x, y, 50, 70);
+                y += 75;
+                if (y > 400) {
+                    y = 0;
+                    x += 60;
+                }
+
+                Menu.panelFile.add(archivo);
+                Menu.panelFile.repaint();
+            }
+
+        });
+        Menu.setVisible(true);
+        Menu.setLocationRelativeTo(null);
     }
-    public void Registro(){
-        Registro1 nuevo = new Registro1(this,true);
-        nuevo.Acept.addActionListener(new ActionListener(){
+    public void crearArchivo(File ruta,String file) throws FileNotFoundException, UnsupportedEncodingException{
+        PrintWriter archivo = new PrintWriter(ruta.getAbsoluteFile()+ "\\" + file, "UTF-8");
+        
+    }
+    public void crearCarpeta(String ruta,String username,File carpeta){
+        directorio = new File(carpeta.getAbsoluteFile()+"\\" + ruta);
+        if (!directorio.exists()) {
+            if (directorio.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+                return;
+            }
+        }
+    }
+    public void EliminarCarpeta(String username, String nombreFile,File carpeta){
+        contClik=0;
+        try {
+            Runtime.getRuntime().exec("cmd /c RD " + nombreFile, null, carpeta);
+            Runtime.getRuntime().exec("cmd /c del " + nombreFile, null, carpeta);
+        } catch (IOException ex) {
+            System.out.println("No se pudo Eliminar");
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void EliminarArchivo(String username, String nombreFile,File carpeta) throws InterruptedException{
+        contClik=0;
+        try {
+            Runtime.getRuntime().exec("cmd /c del " + nombreFile, null, carpeta);
+            Thread.sleep(500);
+        } catch (IOException ex) {
+            System.out.println("No se pudo Eliminar");
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public JLabel returnJlabel(String nombre){
+        JLabel archivo = new JLabel();
+        archivo.setToolTipText(nombre);
+        archivo.setName(nombre);
+        archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file2.png")));
+        archivo.setText(nombre);
+        archivo.setHorizontalTextPosition(JLabel.CENTER);
+        archivo.setVerticalTextPosition(JLabel.BOTTOM);
+        archivo.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                contClik+=1;
+                nombreFile = archivo.getName();
+                System.out.println(nombreFile);
+                if(contClik==2){    
+                    contClik=0;
+                    try {
+                        String ruta = carpeta.getAbsolutePath();
+                        try{
+                            String prueba = ruta.substring(ruta.length()-nombreFile.length(),ruta.length());
+                            if(prueba.equals(nombreFile)){
+                                ruta = carpeta.getAbsolutePath();
+                            }else{
+                                ruta = carpeta.getAbsolutePath()+"\\"+nombreFile;
+                            }
+                        }catch(Exception ex){}
+                        carpeta = new File(ruta);
+                        MenuUser(username,carpetaPadre,nombreFile,carpeta);   
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+        });
+
+        /*if(cont==4){
+         y+=13;
+         x=0;
+         cont=0;
+         }*/
+        archivo.setBounds(x, y, 50, 70);
+        y += 75;
+        if (y > 400) {
+            y = 0;
+            x += 60;
+        }
+
+        return archivo;
+        
+    }
+    
+    public void manejoCarpetasyArchivos() {
+    }
+    public void Registro() {
+        Registro1 nuevo = new Registro1(this, true);
+        nuevo.Acept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = nuevo.idUsername.getText();
                 String password = nuevo.idPassword.getText();
                 tabla.add(username, password);
-                directorio = new File(System.getProperty("user.dir")+"\\"+"raiz_"+username);
+                directorio = new File(System.getProperty("user.dir") + "\\" + "raiz_" + username);
                 if (!directorio.exists()) {
-                        if (directorio.mkdirs()) {
-                            System.out.println("Directorio creado");
-                        } else {
-                            System.out.println("Error al crear directorio");
-                        }
+                    if (directorio.mkdirs()) {
+                        System.out.println("Directorio creado");
+                    } else {
+                        System.out.println("Error al crear directorio");
                     }
-                JOptionPane.showMessageDialog(null,"Bienvenido al sistema " + username);
+                }
+                JOptionPane.showMessageDialog(null, "Bienvenido al sistema " + username);
                 nuevo.dispose();
             }
         });
         nuevo.setLocationRelativeTo(this);
-        nuevo.setSize(500,500);
+        nuevo.setSize(500, 500);
         nuevo.setVisible(true);
-        
     }
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         Registro();
     }//GEN-LAST:event_RegistrarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -228,7 +558,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
     private javax.swing.JButton Registrar;

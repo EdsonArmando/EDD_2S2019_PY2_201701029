@@ -5,17 +5,32 @@
  */
 package Views;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author EG
  */
-public class MenuUsuario extends java.awt.Dialog {
-
+public  class MenuUsuario extends java.awt.Dialog {
+    static String raiz="";
+    int contClik=0;
+    int x=0;
+    int y=0;
+    /*
+    Variable raiz de la carpeta
+    */
     /**
      * Creates new form MenuUsuario
      */
-    public MenuUsuario(java.awt.Frame parent, boolean modal) {
+    public MenuUsuario(java.awt.Frame parent, String modal) {
         super(parent, modal);
+        this.raiz =modal;
         initComponents();
     }
 
@@ -41,9 +56,10 @@ public class MenuUsuario extends java.awt.Dialog {
         idArchModificar = new javax.swing.JButton();
         idArchEliminar = new javax.swing.JButton();
         idArchSubir = new javax.swing.JButton();
+        idAvl = new javax.swing.JButton();
+        idMatriz = new javax.swing.JButton();
         panelFile = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        idDirectorio = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -96,14 +112,23 @@ public class MenuUsuario extends java.awt.Dialog {
         );
 
         jLabel3.setText("Archivos");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         idArchCrear.setText("Crear");
 
         idArchModificar.setText("Modificar");
 
-        idArchEliminar.setText("jButton3");
+        idArchEliminar.setText("Eliminar");
 
-        idArchSubir.setText("jButton4");
+        idArchSubir.setText("Subir");
+
+        idAvl.setText("AVL");
+
+        idMatriz.setText("Matirz");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -115,10 +140,12 @@ public class MenuUsuario extends java.awt.Dialog {
                     .addComponent(idArchCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(idArchModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addComponent(idArchEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(idArchSubir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(idAvl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(idArchSubir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(idMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -134,33 +161,14 @@ public class MenuUsuario extends java.awt.Dialog {
                 .addComponent(idArchEliminar)
                 .addGap(18, 18, 18)
                 .addComponent(idArchSubir)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file.png"))); // NOI18N
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file2.png"))); // NOI18N
-
-        javax.swing.GroupLayout panelFileLayout = new javax.swing.GroupLayout(panelFile);
-        panelFile.setLayout(panelFileLayout);
-        panelFileLayout.setHorizontalGroup(
-            panelFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFileLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(idAvl)
+                .addGap(18, 18, 18)
+                .addComponent(idMatriz)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
-        panelFileLayout.setVerticalGroup(
-            panelFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFileLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(panelFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+
+        panelFile.setLayout(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -172,13 +180,14 @@ public class MenuUsuario extends java.awt.Dialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 603, Short.MAX_VALUE)
+                        .addComponent(idDirectorio, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 303, Short.MAX_VALUE)
                         .addComponent(idBienvenida)
                         .addGap(117, 117, 117))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(panelFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
@@ -188,14 +197,17 @@ public class MenuUsuario extends java.awt.Dialog {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(idBienvenida))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(idBienvenida)
+                    .addComponent(idDirectorio, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -209,20 +221,34 @@ public class MenuUsuario extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
-
+    public void nuevo(String padre,String hijo){
+        
+    }
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        JOptionPane.showMessageDialog(null,this.getTitle());
+        
+        
+    }//GEN-LAST:event_jLabel3MouseClicked
+    public String nombbre() {
+        return this.getTitle();
+    }
+    public void paintDirectory(String folder) throws IOException{
+        Process process = Runtime.getRuntime().exec("cmd /c dir", null, new File(System.getProperty("user.dir")+"\\src"));
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MenuUsuario dialog = new MenuUsuario(new java.awt.Frame(), true);
+                MenuUsuario dialog = new MenuUsuario(new java.awt.Frame(), "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
                 dialog.setVisible(true);
+                dialog.setLocationRelativeTo(null);
             }
         });
     }
@@ -233,16 +259,17 @@ public class MenuUsuario extends java.awt.Dialog {
     public javax.swing.JButton idArchEliminar;
     public javax.swing.JButton idArchModificar;
     public javax.swing.JButton idArchSubir;
+    public javax.swing.JButton idAvl;
     public javax.swing.JLabel idBienvenida;
     public javax.swing.JButton idCrear;
+    public javax.swing.JLabel idDirectorio;
     public javax.swing.JButton idEliminar;
+    public javax.swing.JButton idMatriz;
     public javax.swing.JButton idModificar;
     public javax.swing.JButton idSubir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel panelFile;

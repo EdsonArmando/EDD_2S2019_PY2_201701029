@@ -1,109 +1,137 @@
 digraph Grafica { 
 node[shape=record,style=filled] 
 "RAIZ-1-1"[label ="{RAIZ}",group = 1]
- "Fila:usac-1usac"[label ="usac" ,group = 1 ]
-"Fila:/-1/"[label ="/" ,group = 1 ]
+ "Fila:/-1/"[label ="/" ,group = 1 ]
 "Fila:home-1home"[label ="home" ,group = 1 ]
-"Fila:documents-1documents"[label ="documents" ,group = 1 ]
-"Fila:vendor-1vendor"[label ="vendor" ,group = 1 ]
-"Fila:view-1view"[label ="view" ,group = 1 ]
+"Fila:dos-1dos"[label ="dos" ,group = 1 ]
 "Fila:cuatro-1cuatro"[label ="cuatro" ,group = 1 ]
+"Fila:cinco-1cinco"[label ="cinco" ,group = 1 ]
 "COL:/-1/"[label ="/" ,group =2]
-"prueba-/vendor"[label ="prueba" ,group = 2 ]
 "COL:home-1home"[label ="home" ,group =3]
 "/home-home/"[label ="/home" ,group = 3 ]
-"hola-homevendor"[label ="hola" ,group = 3 ]
-"COL:documents-1documents"[label ="documents" ,group =4]
-"home/documents-documentshome"[label ="home/documents" ,group = 4 ]
-"COL:usac-1usac"[label ="usac" ,group =5]
-"documents/usac-usacdocuments"[label ="documents/usac" ,group = 5 ]
-"COL:vendor-1vendor"[label ="vendor" ,group =6]
-"documents/vendor-vendordocuments"[label ="documents/vendor" ,group = 6 ]
-"COL:view-1view"[label ="view" ,group =7]
-"vendor/view-viewvendor"[label ="vendor/view" ,group = 7 ]
-"pru-viewview"[label ="pru" ,group = 7 ]
-"COL:dos-1dos"[label ="dos" ,group =8]
-"logica-dosvendor"[label ="logica" ,group = 8 ]
-"Edson-doscuatro"[label ="Edson" ,group = 8 ]
+"COL:dos-1dos"[label ="dos" ,group =4]
+"home/dos-doshome"[label ="home/dos" ,group = 4 ]
+"COL:cuatro-1cuatro"[label ="cuatro" ,group =5]
+"home/cuatro-cuatrohome"[label ="home/cuatro" ,group = 5 ]
+"COL:cinco-1cinco"[label ="cinco" ,group =6]
+"home/cinco-cincohome"[label ="home/cinco" ,group = 6 ]
+"COL:juna-1juna"[label ="juna" ,group =7]
+"dos/juna-junados"[label ="dos/juna" ,group = 7 ]
+"COL:compi2-1compi2"[label ="compi2" ,group =8]
+"dos/compi2-compi2dos"[label ="dos/compi2" ,group = 8 ]
+"COL:compi1-1compi1"[label ="compi1" ,group =9]
+"dos/compi1-compi1dos"[label ="dos/compi1" ,group = 9 ]
+"COL:conquista-1conquista"[label ="conquista" ,group =10]
+"cuatro/conquista-conquistacuatro"[label ="cuatro/conquista" ,group = 10 ]
+"COL:ilusion-1ilusion"[label ="ilusion" ,group =11]
+"cuatro/ilusion-ilusioncuatro"[label ="cuatro/ilusion" ,group = 11 ]
+"COL:ratstro-1ratstro"[label ="ratstro" ,group =12]
+"cuatro/ratstro-ratstrocuatro"[label ="cuatro/ratstro" ,group = 12 ]
+"COL:denuevo-1denuevo"[label ="denuevo" ,group =13]
+"cinco/denuevo-denuevocinco"[label ="cinco/denuevo" ,group = 13 ]
+"COL:la adore-1la adore"[label ="la adore" ,group =14]
+"cinco/la adore-la adorecinco"[label ="cinco/la adore" ,group = 14 ]
+"COL:nunca-1nunca"[label ="nunca" ,group =15]
+"cinco/nunca-nuncacinco"[label ="cinco/nunca" ,group = 15 ]
 
 
-{rank = same;"Fila:usac-1usac";}
 {rank = same;"Fila:/-1/";"/home-home/";}
-{rank = same;"Fila:home-1home";"home/documents-documentshome";}
-{rank = same;"Fila:documents-1documents";"documents/usac-usacdocuments";"documents/vendor-vendordocuments";}
-{rank = same;"Fila:vendor-1vendor";"prueba-/vendor";"hola-homevendor";"vendor/view-viewvendor";"logica-dosvendor";}
-{rank = same;"Fila:view-1view";"pru-viewview";}
-{rank = same;"Fila:cuatro-1cuatro";"Edson-doscuatro";}
-{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:documents-1documents";"COL:usac-1usac";"COL:vendor-1vendor";"COL:view-1view";"COL:dos-1dos";}
+{rank = same;"Fila:home-1home";"home/dos-doshome";"home/cuatro-cuatrohome";"home/cinco-cincohome";}
+{rank = same;"Fila:dos-1dos";"dos/juna-junados";"dos/compi2-compi2dos";"dos/compi1-compi1dos";}
+{rank = same;"Fila:cuatro-1cuatro";"cuatro/conquista-conquistacuatro";"cuatro/ilusion-ilusioncuatro";"cuatro/ratstro-ratstrocuatro";}
+{rank = same;"Fila:cinco-1cinco";"cinco/denuevo-denuevocinco";"cinco/la adore-la adorecinco";"cinco/nunca-nuncacinco";}
+{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:dos-1dos";"COL:cuatro-1cuatro";"COL:cinco-1cinco";"COL:juna-1juna";"COL:compi2-1compi2";"COL:compi1-1compi1";"COL:conquista-1conquista";"COL:ilusion-1ilusion";"COL:ratstro-1ratstro";"COL:denuevo-1denuevo";"COL:la adore-1la adore";"COL:nunca-1nunca";}
 
 
-"RAIZ-1-1" -> "Fila:usac-1usac"
-"RAIZ-1-1" -> "Fila:usac-1usac"[dir=back]
-"Fila:usac-1usac"->"Fila:/-1/"
-"Fila:usac-1usac"->"Fila:/-1/"[dir=back]
+"RAIZ-1-1" -> "Fila:/-1/"
+"RAIZ-1-1" -> "Fila:/-1/"[dir=back]
 "Fila:/-1/"->"/home-home/"
 "Fila:/-1/"->"/home-home/"[dir=back]
 "Fila:/-1/"->"Fila:home-1home"
 "Fila:/-1/"->"Fila:home-1home"[dir=back]
-"Fila:home-1home"->"home/documents-documentshome"
-"Fila:home-1home"->"home/documents-documentshome"[dir=back]
-"Fila:home-1home"->"Fila:documents-1documents"
-"Fila:home-1home"->"Fila:documents-1documents"[dir=back]
-"Fila:documents-1documents"->"documents/usac-usacdocuments"
-"Fila:documents-1documents"->"documents/usac-usacdocuments"[dir=back]
-"Fila:documents-1documents"->"Fila:vendor-1vendor"
-"Fila:documents-1documents"->"Fila:vendor-1vendor"[dir=back]
-"documents/usac-usacdocuments"->"documents/vendor-vendordocuments"
-"documents/usac-usacdocuments"->"documents/vendor-vendordocuments"[dir=back]
-"Fila:vendor-1vendor"->"prueba-/vendor"
-"Fila:vendor-1vendor"->"prueba-/vendor"[dir=back]
-"Fila:vendor-1vendor"->"Fila:view-1view"
-"Fila:vendor-1vendor"->"Fila:view-1view"[dir=back]
-"prueba-/vendor"->"hola-homevendor"
-"prueba-/vendor"->"hola-homevendor"[dir=back]
-"hola-homevendor"->"vendor/view-viewvendor"
-"hola-homevendor"->"vendor/view-viewvendor"[dir=back]
-"vendor/view-viewvendor"->"logica-dosvendor"
-"vendor/view-viewvendor"->"logica-dosvendor"[dir=back]
-"Fila:view-1view"->"pru-viewview"
-"Fila:view-1view"->"pru-viewview"[dir=back]
-"Fila:view-1view"->"Fila:cuatro-1cuatro"
-"Fila:view-1view"->"Fila:cuatro-1cuatro"[dir=back]
-"Fila:cuatro-1cuatro"->"Edson-doscuatro"
-"Fila:cuatro-1cuatro"->"Edson-doscuatro"[dir=back]
+"Fila:home-1home"->"home/dos-doshome"
+"Fila:home-1home"->"home/dos-doshome"[dir=back]
+"Fila:home-1home"->"Fila:dos-1dos"
+"Fila:home-1home"->"Fila:dos-1dos"[dir=back]
+"home/dos-doshome"->"home/cuatro-cuatrohome"
+"home/dos-doshome"->"home/cuatro-cuatrohome"[dir=back]
+"home/cuatro-cuatrohome"->"home/cinco-cincohome"
+"home/cuatro-cuatrohome"->"home/cinco-cincohome"[dir=back]
+"Fila:dos-1dos"->"dos/juna-junados"
+"Fila:dos-1dos"->"dos/juna-junados"[dir=back]
+"Fila:dos-1dos"->"Fila:cuatro-1cuatro"
+"Fila:dos-1dos"->"Fila:cuatro-1cuatro"[dir=back]
+"dos/juna-junados"->"dos/compi2-compi2dos"
+"dos/juna-junados"->"dos/compi2-compi2dos"[dir=back]
+"dos/compi2-compi2dos"->"dos/compi1-compi1dos"
+"dos/compi2-compi2dos"->"dos/compi1-compi1dos"[dir=back]
+"Fila:cuatro-1cuatro"->"cuatro/conquista-conquistacuatro"
+"Fila:cuatro-1cuatro"->"cuatro/conquista-conquistacuatro"[dir=back]
+"Fila:cuatro-1cuatro"->"Fila:cinco-1cinco"
+"Fila:cuatro-1cuatro"->"Fila:cinco-1cinco"[dir=back]
+"cuatro/conquista-conquistacuatro"->"cuatro/ilusion-ilusioncuatro"
+"cuatro/conquista-conquistacuatro"->"cuatro/ilusion-ilusioncuatro"[dir=back]
+"cuatro/ilusion-ilusioncuatro"->"cuatro/ratstro-ratstrocuatro"
+"cuatro/ilusion-ilusioncuatro"->"cuatro/ratstro-ratstrocuatro"[dir=back]
+"Fila:cinco-1cinco"->"cinco/denuevo-denuevocinco"
+"Fila:cinco-1cinco"->"cinco/denuevo-denuevocinco"[dir=back]
+"cinco/denuevo-denuevocinco"->"cinco/la adore-la adorecinco"
+"cinco/denuevo-denuevocinco"->"cinco/la adore-la adorecinco"[dir=back]
+"cinco/la adore-la adorecinco"->"cinco/nunca-nuncacinco"
+"cinco/la adore-la adorecinco"->"cinco/nunca-nuncacinco"[dir=back]
 "RAIZ-1-1" -> "COL:/-1/"
 "RAIZ-1-1" -> "COL:/-1/"[dir=back]
-"COL:/-1/"->"prueba-/vendor"
-"COL:/-1/"->"prueba-/vendor"[dir=back]
 "COL:/-1/"->"COL:home-1home"
 "COL:/-1/"->"COL:home-1home"[dir=back]
 "COL:home-1home"->"/home-home/"
 "COL:home-1home"->"/home-home/"[dir=back]
-"COL:home-1home"->"COL:documents-1documents"
-"COL:home-1home"->"COL:documents-1documents"[dir=back]
-"/home-home/"->"hola-homevendor"
-"/home-home/"->"hola-homevendor"[dir=back]
-"COL:documents-1documents"->"home/documents-documentshome"
-"COL:documents-1documents"->"home/documents-documentshome"[dir=back]
-"COL:documents-1documents"->"COL:usac-1usac"
-"COL:documents-1documents"->"COL:usac-1usac"[dir=back]
-"COL:usac-1usac"->"documents/usac-usacdocuments"
-"COL:usac-1usac"->"documents/usac-usacdocuments"[dir=back]
-"COL:usac-1usac"->"COL:vendor-1vendor"
-"COL:usac-1usac"->"COL:vendor-1vendor"[dir=back]
-"COL:vendor-1vendor"->"documents/vendor-vendordocuments"
-"COL:vendor-1vendor"->"documents/vendor-vendordocuments"[dir=back]
-"COL:vendor-1vendor"->"COL:view-1view"
-"COL:vendor-1vendor"->"COL:view-1view"[dir=back]
-"COL:view-1view"->"vendor/view-viewvendor"
-"COL:view-1view"->"vendor/view-viewvendor"[dir=back]
-"COL:view-1view"->"COL:dos-1dos"
-"COL:view-1view"->"COL:dos-1dos"[dir=back]
-"vendor/view-viewvendor"->"pru-viewview"
-"vendor/view-viewvendor"->"pru-viewview"[dir=back]
-"COL:dos-1dos"->"logica-dosvendor"
-"COL:dos-1dos"->"logica-dosvendor"[dir=back]
-"logica-dosvendor"->"Edson-doscuatro"
-"logica-dosvendor"->"Edson-doscuatro"[dir=back]
+"COL:home-1home"->"COL:dos-1dos"
+"COL:home-1home"->"COL:dos-1dos"[dir=back]
+"COL:dos-1dos"->"home/dos-doshome"
+"COL:dos-1dos"->"home/dos-doshome"[dir=back]
+"COL:dos-1dos"->"COL:cuatro-1cuatro"
+"COL:dos-1dos"->"COL:cuatro-1cuatro"[dir=back]
+"COL:cuatro-1cuatro"->"home/cuatro-cuatrohome"
+"COL:cuatro-1cuatro"->"home/cuatro-cuatrohome"[dir=back]
+"COL:cuatro-1cuatro"->"COL:cinco-1cinco"
+"COL:cuatro-1cuatro"->"COL:cinco-1cinco"[dir=back]
+"COL:cinco-1cinco"->"home/cinco-cincohome"
+"COL:cinco-1cinco"->"home/cinco-cincohome"[dir=back]
+"COL:cinco-1cinco"->"COL:juna-1juna"
+"COL:cinco-1cinco"->"COL:juna-1juna"[dir=back]
+"COL:juna-1juna"->"dos/juna-junados"
+"COL:juna-1juna"->"dos/juna-junados"[dir=back]
+"COL:juna-1juna"->"COL:compi2-1compi2"
+"COL:juna-1juna"->"COL:compi2-1compi2"[dir=back]
+"COL:compi2-1compi2"->"dos/compi2-compi2dos"
+"COL:compi2-1compi2"->"dos/compi2-compi2dos"[dir=back]
+"COL:compi2-1compi2"->"COL:compi1-1compi1"
+"COL:compi2-1compi2"->"COL:compi1-1compi1"[dir=back]
+"COL:compi1-1compi1"->"dos/compi1-compi1dos"
+"COL:compi1-1compi1"->"dos/compi1-compi1dos"[dir=back]
+"COL:compi1-1compi1"->"COL:conquista-1conquista"
+"COL:compi1-1compi1"->"COL:conquista-1conquista"[dir=back]
+"COL:conquista-1conquista"->"cuatro/conquista-conquistacuatro"
+"COL:conquista-1conquista"->"cuatro/conquista-conquistacuatro"[dir=back]
+"COL:conquista-1conquista"->"COL:ilusion-1ilusion"
+"COL:conquista-1conquista"->"COL:ilusion-1ilusion"[dir=back]
+"COL:ilusion-1ilusion"->"cuatro/ilusion-ilusioncuatro"
+"COL:ilusion-1ilusion"->"cuatro/ilusion-ilusioncuatro"[dir=back]
+"COL:ilusion-1ilusion"->"COL:ratstro-1ratstro"
+"COL:ilusion-1ilusion"->"COL:ratstro-1ratstro"[dir=back]
+"COL:ratstro-1ratstro"->"cuatro/ratstro-ratstrocuatro"
+"COL:ratstro-1ratstro"->"cuatro/ratstro-ratstrocuatro"[dir=back]
+"COL:ratstro-1ratstro"->"COL:denuevo-1denuevo"
+"COL:ratstro-1ratstro"->"COL:denuevo-1denuevo"[dir=back]
+"COL:denuevo-1denuevo"->"cinco/denuevo-denuevocinco"
+"COL:denuevo-1denuevo"->"cinco/denuevo-denuevocinco"[dir=back]
+"COL:denuevo-1denuevo"->"COL:la adore-1la adore"
+"COL:denuevo-1denuevo"->"COL:la adore-1la adore"[dir=back]
+"COL:la adore-1la adore"->"cinco/la adore-la adorecinco"
+"COL:la adore-1la adore"->"cinco/la adore-la adorecinco"[dir=back]
+"COL:la adore-1la adore"->"COL:nunca-1nunca"
+"COL:la adore-1la adore"->"COL:nunca-1nunca"[dir=back]
+"COL:nunca-1nunca"->"cinco/nunca-nuncacinco"
+"COL:nunca-1nunca"->"cinco/nunca-nuncacinco"[dir=back]
 
 }

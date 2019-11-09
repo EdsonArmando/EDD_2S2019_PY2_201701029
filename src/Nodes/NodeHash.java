@@ -6,6 +6,7 @@
 package Nodes;
 
 import Structures.CollisionList;
+import Structures.MatrizDispersa;
 import java.util.Date;
 
 /**
@@ -19,8 +20,10 @@ public class NodeHash {
     Date fechaCreacion;
     public CollisionList list;
     public NodeHash next;
+    public MatrizDispersa matrix;
     public NodeHash(String key,String password,int indice){
         list = new CollisionList();
+        matrix = new MatrizDispersa();
         this.nombreUsuario = key;
         this.indice = indice;
         this.contrasenia = password;

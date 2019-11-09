@@ -10,19 +10,20 @@ import Nodes.NodeHash;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author EG
  */
 public class TablaHash {
-    
+    private int conteoNodos= 0;
     /*Tamaño del arreglo a utilizar en la tabla Hash*/
-    private final Integer size = 7;
+    private  int size = 7;
     /*
     Arreglo que se utilizara para la tabla hash
     */
-    private NodeHash[] entries = new NodeHash[size];
+    private NodeHash[] entries = new NodeHash[500];
    //Metodo para buscar un valor dentor de la tabla Hash
     public Integer buscar(){
         return null;
@@ -48,24 +49,37 @@ public class TablaHash {
 			mult = mult * 256;
 		}
 
-		return (Math.abs(sum) % 7);
+		return (Math.abs(sum) % this.size);
 	}
     /*
     Agregar nuevo elemento a la tabla Hash
     */
     public void add(String key,String value){
-        int indice = hashMejor(key);
-        final NodeHash hashEntry = new NodeHash(key, value,indice);
-        if(entries[indice]==null){
-            entries[indice] = hashEntry;
-        }
-        /*
-            En caso que exista una colision
-        */
-        else{
-            System.out.println("Existio una colision: " + key);
-            NodeHash temp = entries[indice];
-            temp.list.AddNode(hashEntry);
+        if(value.length()>8){
+            if(porcentaje()>75){
+            this.size=16;
+            NodeHash[] nueva = reubicarNodos();
+            entries = nueva;
+            }
+            int indice = hashMejor(key);
+            final NodeHash hashEntry = new NodeHash(key, value,indice);
+            hashEntry.matrix.insertar("", "/", "");
+            hashEntry.matrix.insertar("/", "home", "/home");
+            if(entries[indice]==null){
+                entries[indice] = hashEntry;
+                conteoNodos+=1;
+            }
+            /*
+                En caso que exista una colision
+            */
+            else{
+                System.out.println("Existio una colision: " + key);
+                NodeHash temp = entries[indice];
+                temp.list.AddNode(hashEntry);
+                conteoNodos+=1;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,key+ "La contraseña debe tener al menos 8 caracters");
         }
     }
     /*
@@ -87,7 +101,7 @@ public class TablaHash {
     /*
     Obtener nodoHash de la tabla
     */
-    public String getNodeHash(String key){
+    public NodeHash getNodeHash(String key){
         int indice = hashMejor(key);
         if(entries[indice]!=null){
             NodeHash temp = entries[indice];
@@ -95,7 +109,7 @@ public class TablaHash {
                     && temp.next != null ) {
                 temp = temp.next;
             }
-            return temp.nombreUsuario;
+            return temp;
         }
         return null;
     }
@@ -109,6 +123,13 @@ public class TablaHash {
             }
         }
     }
+    /*
+     Devuelve el porcentaje de llenado de la tabla hash
+    */
+    public float porcentaje(){
+        float porcent = 100/this.size;
+        return porcent*conteoNodos;
+    }
     public void graphTable() throws IOException{
         int cont = 0;
         FileWriter file = new FileWriter("tablaHash.txt");
@@ -119,7 +140,7 @@ public class TablaHash {
 "	node [shape=record,width=.1,height=.1];\n" +
 "	node [width = 1.5];"
                 + "\nnode0 [label = \"");
-        for(int i = 0; i<7;i++){
+        for(int i = 0; i<this.size;i++){
             file.write("<f"+String.valueOf(i)+">" + " " + String.valueOf(i+1) + "|");
             
         }   
@@ -139,9 +160,32 @@ public class TablaHash {
         file.write("}");
         file.close();
         Runtime.getRuntime().exec("cmd /c dot -Tpng tablaHash.txt -o Hash.png", null, new File(System.getProperty("user.dir")));
-        
     }
     public TablaHash(){
     
+    }
+    private int numeroPrimo(Integer numero){
+        return 0;
+    }
+    private NodeHash[] reubicarNodos() {
+        NodeHash[] nueva = new NodeHash[500];
+        for(NodeHash item : entries){
+           if(item!=null){
+            int indice = hashMejor(item.nombreUsuario);
+            final NodeHash hashEntry = new NodeHash(item.nombreUsuario, item.contrasenia,indice);
+            hashEntry.matrix = item.matrix;
+            if(nueva[indice]==null){
+                nueva[indice] = hashEntry;
+            }
+            /*
+                En caso que exista una colision
+            */
+            else{
+                NodeHash temp = nueva[indice];
+                temp.list.AddNode(hashEntry);
+            }
+           }
+        }
+        return nueva;
     }
 }

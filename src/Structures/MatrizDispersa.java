@@ -8,6 +8,7 @@ package Structures;
 import Nodes.NodoCabecera;
 import Nodes.NodoContenido;
 import Nodes.NodoLateral;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -25,7 +26,7 @@ public class MatrizDispersa {
         listaCab = new Cabecera();
         listlat = new Lateral();
     }
-    public void insertar(String rutax, String rutay, String nombre) {
+    public void insertar(String rutay,String rutax , String nombre) {
         NodoContenido nuevo = new NodoContenido(nombre,rutax,rutay);
         if (listaCab.buscar(rutax)==false) {
             if(rutax!=""){
@@ -46,6 +47,22 @@ public class MatrizDispersa {
         }
         //cout << "Inserto" << color << "en" << x << " ," << y << endl;
         /*Se inserto el nodo*/
+    }
+    public NodoContenido returnNodoMatriz(String y, String x, String name){
+        NodoLateral temp = listlat.primero;
+        NodoCabecera temp1 = listaCab.primero;
+        NodoContenido temp2;
+        while(temp!=null){
+            temp2 = temp.fila.primero;
+            while(temp2!=null){
+                if(temp2.rutax.equals(x)&& temp2.rutay.equals(y)){
+                    return temp2;
+                }
+                temp2 = temp2.derech;
+            }
+            temp = temp.siguiente;
+        }
+        return null;
     }
     public void graficarMatriz() throws IOException{
         int cont = 2;
@@ -132,5 +149,6 @@ public class MatrizDispersa {
          file.write("\n\n");
         file.write(relaciones+"\n}");
         file.close();
+        Runtime.getRuntime().exec("cmd /c dot -Tpng Matriz.dot -o matrix.png", null, new File(System.getProperty("user.dir")));
     } 
 }

@@ -5,6 +5,8 @@
  */
 package Nodes;
 
+import Structures.AVL;
+
 /**
  *
  * @author EG
@@ -17,10 +19,13 @@ public class NodoContenido {
     public NodoContenido abajo;
     public NodoContenido izqui;
     public NodoContenido derech;
+    public AVL avl;
+    public NodeAVL raiz;
     public NodoContenido(String ruta, String rutax, String rutay){
 		this.ruta = ruta;
                 this.rutax = rutax;
                 this.rutay = rutay;
+                avl = new AVL();
 		arriba = null;
 		abajo = null;
 		izqui = null;

@@ -9,6 +9,7 @@ import Nodes.NodeAVL;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
  *
@@ -19,6 +20,7 @@ public class AVL {
     String inicio = "digraph grafica{nrankdir=TB;\n label=\"Arbol AVL \"; \n node [shape = record, style=filled, fillcolor=seashell2];\n";
     String nodes="";
     String rela= "";
+    public LinkedList<String> tempo = new LinkedList<>();
     NodeAVL izquierdaRotate(NodeAVL x) { 
         NodeAVL y = x.derecha; 
         NodeAVL T2 = y.izquierda; 
@@ -37,17 +39,14 @@ public class AVL {
     int getBalance(NodeAVL N) { 
         if (N == null) 
             return 0; 
-  
         return alt(N.izquierda) - alt(N.derecha); 
     } 
     NodeAVL derechaRotate(NodeAVL y) { 
         NodeAVL x = y.izquierda; 
         NodeAVL T2 = x.derecha; 
-  
         // Perform rotation 
         x.derecha = y; 
         y.izquierda = T2; 
-  
         // Update alts 
         y.alt = maxVal(alt(y.izquierda), alt(y.derecha)) + 1; 
         x.alt = maxVal(alt(x.izquierda), alt(x.derecha)) + 1; 
@@ -73,7 +72,6 @@ public class AVL {
         return node.alt;
     }
     public NodeAVL insert(NodeAVL node, String key) { 
-  
         /* 1.  Perform the normal BST insertion */
         if (node == null) 
             return (new NodeAVL(key)); 
@@ -84,7 +82,6 @@ public class AVL {
             node.derecha = insert(node.derecha, key); 
         else // Duplicate keys not allowed 
             return node; 
-  
         /* 2. Update height of this ancestor node */
         node.alt = 1 + maxVal(alt(node.izquierda), 
                               alt(node.derecha)); 
@@ -121,18 +118,31 @@ public class AVL {
         FileWriter file = new FileWriter("avl.txt");
         file.write(inicio+nodes+rela+"}");
         file.close();
+        nodes="";
+        rela="";
         Runtime.getRuntime().exec("cmd /c dot -Tpng avl.txt -o avl.png", null, new File(System.getProperty("user.dir")));
     }
+    public void reco(NodeAVL root){
+        if(root!=null){
+            tempo.add(root.nombreArchivo);
+            reco(root.izquierda);
+            reco(root.derecha);
+        }
+    }
+    public LinkedList<String> devLista(){
+        return this.tempo;
+    };
+    
     public void graphAVL(NodeAVL root){
         
         if (root != null){
             String data = "Carne: "+String.valueOf(root.nombreArchivo)+"\\n"+" Nombre: " + root.nombreArchivo +"\\n"+" ALT: " + String.valueOf(root.alt);
-            nodes +="nodo" + String.valueOf(root.nombreArchivo) + " " + "[ label = \"<C0>|"+data+"|<C1>\"];\n";
+            nodes +="\"nodo" + String.valueOf(root.nombreArchivo) + "\" " + "[ label = \"<C0>|"+data+"|<C1>\"];\n";
             if(root.izquierda != null){
-                rela += "nodo" + String.valueOf(root.nombreArchivo) + ":C0->" + "nodo" + String.valueOf(root.izquierda.nombreArchivo) + "\n";
+                rela += "\"nodo" + String.valueOf(root.nombreArchivo) + "\":C0->" + "\"nodo" + String.valueOf(root.izquierda.nombreArchivo) + "\"\n";
                 }
             if(root.derecha != null){
-                rela += "nodo" + String.valueOf(root.nombreArchivo) + ":C1->" + "nodo" + String.valueOf(root.derecha.nombreArchivo) + "\n";
+                rela += "\"nodo" + String.valueOf(root.nombreArchivo) + "\":C1->" + "\"nodo" + String.valueOf(root.derecha.nombreArchivo) + "\"\n";
             }
             graphAVL(root.izquierda);
             graphAVL(root.derecha);
