@@ -263,9 +263,11 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     temporal.matrix.graficarMatriz();
+                    Runtime.getRuntime().exec("cmd /c matrix.png", null, new File(System.getProperty("user.dir")));
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
             }
         });
         Menu.idArchEliminar.addActionListener(new ActionListener() {
@@ -346,6 +348,7 @@ public class Login extends javax.swing.JFrame {
                 try {
                     nodoMatriz.avl.graphAVL(nodoMatriz.raiz);
                     nodoMatriz.avl.importImage();
+                    Runtime.getRuntime().exec("cmd /c avl.png", null, new File(System.getProperty("user.dir")));
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -356,6 +359,7 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 String ruta = JOptionPane.showInputDialog("Ingrese el nombre de la carpeta");
                 temporal.matrix.insertar(hijo, ruta, hijo + "/" + ruta);
+                temporal.matrix.insertar(ruta, "", "");
                 nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "",true);
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(ruta);

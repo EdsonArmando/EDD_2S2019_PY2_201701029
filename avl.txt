@@ -1,11 +1,9 @@
 digraph grafica{nrankdir=TB;
  label="Arbol AVL "; 
  node [shape = record, style=filled, fillcolor=seashell2];
-"nodotres" [ label = "<C0>|Carne: tres\n Nombre: tres\n ALT: 3\n Contenido: |<C1>"];
-"nododos" [ label = "<C0>|Carne: dos\n Nombre: dos\n ALT: 1\n Contenido: |<C1>"];
-"nodonuevo" [ label = "<C0>|Carne: nuevo\n Nombre: nuevo\n ALT: 2\n Contenido: |<C1>"];
-"nodojava.coo" [ label = "<C0>|Carne: java.coo\n Nombre: java.coo\n ALT: 1\n Contenido: |<C1>"];
-"nodotres":C0->"nododos"
-"nodotres":C1->"nodonuevo"
-"nodonuevo":C1->"nodojava.coo"
+"nodoseis" [ label = "<C0>|Carne: seis\n Nombre: seis\n ALT: 2\n Contenido: |<C1>"];
+"nodoocho" [ label = "<C0>|Carne: ocho\n Nombre: ocho\n ALT: 1\n Contenido: |<C1>"];
+"nodosiete" [ label = "<C0>|Carne: siete\n Nombre: siete\n ALT: 1\n Contenido: |<C1>"];
+"nodoseis":C0->"nodoocho"
+"nodoseis":C1->"nodosiete"
 }

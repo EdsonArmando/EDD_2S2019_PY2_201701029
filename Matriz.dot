@@ -3,36 +3,34 @@ node[shape=record,style=filled]
 "RAIZ-1-1"[label ="{RAIZ}",group = 1]
  "Fila:/-1/"[label ="/" ,group = 1 ]
 "Fila:home-1home"[label ="home" ,group = 1 ]
-"Fila:nuevo-1nuevo"[label ="nuevo" ,group = 1 ]
-"Fila:dos-1dos"[label ="dos" ,group = 1 ]
-"Fila:tres-1tres"[label ="tres" ,group = 1 ]
+"Fila:documents-1documents"[label ="documents" ,group = 1 ]
+"Fila:usac-1usac"[label ="usac" ,group = 1 ]
+"Fila:vendor-1vendor"[label ="vendor" ,group = 1 ]
+"Fila:view-1view"[label ="view" ,group = 1 ]
+"Fila:jino-1jino"[label ="jino" ,group = 1 ]
 "COL:/-1/"[label ="/" ,group =2]
 "COL:home-1home"[label ="home" ,group =3]
 "/home-home/"[label ="/home" ,group = 3 ]
-"COL:nuevo-1nuevo"[label ="nuevo" ,group =4]
-"home/nuevo-nuevohome"[label ="home/nuevo" ,group = 4 ]
-"COL:dos-1dos"[label ="dos" ,group =5]
-"home/dos-doshome"[label ="home/dos" ,group = 5 ]
-"COL:tres-1tres"[label ="tres" ,group =6]
-"home/tres-treshome"[label ="home/tres" ,group = 6 ]
-"COL:archivos-1archivos"[label ="archivos" ,group =7]
-"nuevo/archivos-archivosnuevo"[label ="nuevo/archivos" ,group = 7 ]
-"COL:apli-1apli"[label ="apli" ,group =8]
-"nuevo/apli-aplinuevo"[label ="nuevo/apli" ,group = 8 ]
-"COL:lenguajes-1lenguajes"[label ="lenguajes" ,group =9]
-"nuevo/lenguajes-lenguajesnuevo"[label ="nuevo/lenguajes" ,group = 9 ]
-"COL:la-1la"[label ="la" ,group =10]
-"dos/la-lados"[label ="dos/la" ,group = 10 ]
-"COL:jua-1jua"[label ="jua" ,group =11]
-"tres/jua-juatres"[label ="tres/jua" ,group = 11 ]
+"COL:documents-1documents"[label ="documents" ,group =4]
+"home/documents-documentshome"[label ="home/documents" ,group = 4 ]
+"COL:usac-1usac"[label ="usac" ,group =5]
+"documents/usac-usacdocuments"[label ="documents/usac" ,group = 5 ]
+"COL:vendor-1vendor"[label ="vendor" ,group =6]
+"documents/vendor-vendordocuments"[label ="documents/vendor" ,group = 6 ]
+"COL:view-1view"[label ="view" ,group =7]
+"vendor/view-viewvendor"[label ="vendor/view" ,group = 7 ]
+"COL:jino-1jino"[label ="jino" ,group =8]
+"usac/jino-jinousac"[label ="usac/jino" ,group = 8 ]
 
 
 {rank = same;"Fila:/-1/";"/home-home/";}
-{rank = same;"Fila:home-1home";"home/nuevo-nuevohome";"home/dos-doshome";"home/tres-treshome";}
-{rank = same;"Fila:nuevo-1nuevo";"nuevo/archivos-archivosnuevo";"nuevo/apli-aplinuevo";"nuevo/lenguajes-lenguajesnuevo";}
-{rank = same;"Fila:dos-1dos";"dos/la-lados";}
-{rank = same;"Fila:tres-1tres";"tres/jua-juatres";}
-{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:nuevo-1nuevo";"COL:dos-1dos";"COL:tres-1tres";"COL:archivos-1archivos";"COL:apli-1apli";"COL:lenguajes-1lenguajes";"COL:la-1la";"COL:jua-1jua";}
+{rank = same;"Fila:home-1home";"home/documents-documentshome";}
+{rank = same;"Fila:documents-1documents";"documents/usac-usacdocuments";"documents/vendor-vendordocuments";}
+{rank = same;"Fila:usac-1usac";"usac/jino-jinousac";}
+{rank = same;"Fila:vendor-1vendor";"vendor/view-viewvendor";}
+{rank = same;"Fila:view-1view";}
+{rank = same;"Fila:jino-1jino";}
+{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:documents-1documents";"COL:usac-1usac";"COL:vendor-1vendor";"COL:view-1view";"COL:jino-1jino";}
 
 
 "RAIZ-1-1" -> "Fila:/-1/"
@@ -41,65 +39,51 @@ node[shape=record,style=filled]
 "Fila:/-1/"->"/home-home/"[dir=back]
 "Fila:/-1/"->"Fila:home-1home"
 "Fila:/-1/"->"Fila:home-1home"[dir=back]
-"Fila:home-1home"->"home/nuevo-nuevohome"
-"Fila:home-1home"->"home/nuevo-nuevohome"[dir=back]
-"Fila:home-1home"->"Fila:nuevo-1nuevo"
-"Fila:home-1home"->"Fila:nuevo-1nuevo"[dir=back]
-"home/nuevo-nuevohome"->"home/dos-doshome"
-"home/nuevo-nuevohome"->"home/dos-doshome"[dir=back]
-"home/dos-doshome"->"home/tres-treshome"
-"home/dos-doshome"->"home/tres-treshome"[dir=back]
-"Fila:nuevo-1nuevo"->"nuevo/archivos-archivosnuevo"
-"Fila:nuevo-1nuevo"->"nuevo/archivos-archivosnuevo"[dir=back]
-"Fila:nuevo-1nuevo"->"Fila:dos-1dos"
-"Fila:nuevo-1nuevo"->"Fila:dos-1dos"[dir=back]
-"nuevo/archivos-archivosnuevo"->"nuevo/apli-aplinuevo"
-"nuevo/archivos-archivosnuevo"->"nuevo/apli-aplinuevo"[dir=back]
-"nuevo/apli-aplinuevo"->"nuevo/lenguajes-lenguajesnuevo"
-"nuevo/apli-aplinuevo"->"nuevo/lenguajes-lenguajesnuevo"[dir=back]
-"Fila:dos-1dos"->"dos/la-lados"
-"Fila:dos-1dos"->"dos/la-lados"[dir=back]
-"Fila:dos-1dos"->"Fila:tres-1tres"
-"Fila:dos-1dos"->"Fila:tres-1tres"[dir=back]
-"Fila:tres-1tres"->"tres/jua-juatres"
-"Fila:tres-1tres"->"tres/jua-juatres"[dir=back]
+"Fila:home-1home"->"home/documents-documentshome"
+"Fila:home-1home"->"home/documents-documentshome"[dir=back]
+"Fila:home-1home"->"Fila:documents-1documents"
+"Fila:home-1home"->"Fila:documents-1documents"[dir=back]
+"Fila:documents-1documents"->"documents/usac-usacdocuments"
+"Fila:documents-1documents"->"documents/usac-usacdocuments"[dir=back]
+"Fila:documents-1documents"->"Fila:usac-1usac"
+"Fila:documents-1documents"->"Fila:usac-1usac"[dir=back]
+"documents/usac-usacdocuments"->"documents/vendor-vendordocuments"
+"documents/usac-usacdocuments"->"documents/vendor-vendordocuments"[dir=back]
+"Fila:usac-1usac"->"usac/jino-jinousac"
+"Fila:usac-1usac"->"usac/jino-jinousac"[dir=back]
+"Fila:usac-1usac"->"Fila:vendor-1vendor"
+"Fila:usac-1usac"->"Fila:vendor-1vendor"[dir=back]
+"Fila:vendor-1vendor"->"vendor/view-viewvendor"
+"Fila:vendor-1vendor"->"vendor/view-viewvendor"[dir=back]
+"Fila:vendor-1vendor"->"Fila:view-1view"
+"Fila:vendor-1vendor"->"Fila:view-1view"[dir=back]
+"Fila:view-1view"->"Fila:jino-1jino"
+"Fila:view-1view"->"Fila:jino-1jino"[dir=back]
 "RAIZ-1-1" -> "COL:/-1/"
 "RAIZ-1-1" -> "COL:/-1/"[dir=back]
 "COL:/-1/"->"COL:home-1home"
 "COL:/-1/"->"COL:home-1home"[dir=back]
 "COL:home-1home"->"/home-home/"
 "COL:home-1home"->"/home-home/"[dir=back]
-"COL:home-1home"->"COL:nuevo-1nuevo"
-"COL:home-1home"->"COL:nuevo-1nuevo"[dir=back]
-"COL:nuevo-1nuevo"->"home/nuevo-nuevohome"
-"COL:nuevo-1nuevo"->"home/nuevo-nuevohome"[dir=back]
-"COL:nuevo-1nuevo"->"COL:dos-1dos"
-"COL:nuevo-1nuevo"->"COL:dos-1dos"[dir=back]
-"COL:dos-1dos"->"home/dos-doshome"
-"COL:dos-1dos"->"home/dos-doshome"[dir=back]
-"COL:dos-1dos"->"COL:tres-1tres"
-"COL:dos-1dos"->"COL:tres-1tres"[dir=back]
-"COL:tres-1tres"->"home/tres-treshome"
-"COL:tres-1tres"->"home/tres-treshome"[dir=back]
-"COL:tres-1tres"->"COL:archivos-1archivos"
-"COL:tres-1tres"->"COL:archivos-1archivos"[dir=back]
-"COL:archivos-1archivos"->"nuevo/archivos-archivosnuevo"
-"COL:archivos-1archivos"->"nuevo/archivos-archivosnuevo"[dir=back]
-"COL:archivos-1archivos"->"COL:apli-1apli"
-"COL:archivos-1archivos"->"COL:apli-1apli"[dir=back]
-"COL:apli-1apli"->"nuevo/apli-aplinuevo"
-"COL:apli-1apli"->"nuevo/apli-aplinuevo"[dir=back]
-"COL:apli-1apli"->"COL:lenguajes-1lenguajes"
-"COL:apli-1apli"->"COL:lenguajes-1lenguajes"[dir=back]
-"COL:lenguajes-1lenguajes"->"nuevo/lenguajes-lenguajesnuevo"
-"COL:lenguajes-1lenguajes"->"nuevo/lenguajes-lenguajesnuevo"[dir=back]
-"COL:lenguajes-1lenguajes"->"COL:la-1la"
-"COL:lenguajes-1lenguajes"->"COL:la-1la"[dir=back]
-"COL:la-1la"->"dos/la-lados"
-"COL:la-1la"->"dos/la-lados"[dir=back]
-"COL:la-1la"->"COL:jua-1jua"
-"COL:la-1la"->"COL:jua-1jua"[dir=back]
-"COL:jua-1jua"->"tres/jua-juatres"
-"COL:jua-1jua"->"tres/jua-juatres"[dir=back]
+"COL:home-1home"->"COL:documents-1documents"
+"COL:home-1home"->"COL:documents-1documents"[dir=back]
+"COL:documents-1documents"->"home/documents-documentshome"
+"COL:documents-1documents"->"home/documents-documentshome"[dir=back]
+"COL:documents-1documents"->"COL:usac-1usac"
+"COL:documents-1documents"->"COL:usac-1usac"[dir=back]
+"COL:usac-1usac"->"documents/usac-usacdocuments"
+"COL:usac-1usac"->"documents/usac-usacdocuments"[dir=back]
+"COL:usac-1usac"->"COL:vendor-1vendor"
+"COL:usac-1usac"->"COL:vendor-1vendor"[dir=back]
+"COL:vendor-1vendor"->"documents/vendor-vendordocuments"
+"COL:vendor-1vendor"->"documents/vendor-vendordocuments"[dir=back]
+"COL:vendor-1vendor"->"COL:view-1view"
+"COL:vendor-1vendor"->"COL:view-1view"[dir=back]
+"COL:view-1view"->"vendor/view-viewvendor"
+"COL:view-1view"->"vendor/view-viewvendor"[dir=back]
+"COL:view-1view"->"COL:jino-1jino"
+"COL:view-1view"->"COL:jino-1jino"[dir=back]
+"COL:jino-1jino"->"usac/jino-jinousac"
+"COL:jino-1jino"->"usac/jino-jinousac"[dir=back]
 
 }

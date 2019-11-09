@@ -34,6 +34,7 @@ public class EDD_2S2019_PY2_201701029 {
         login.tabla.add("Antinio","cinco123456");
         login.tabla.add("Pero","cuatro123456");
         login.tabla.add("admin","admin123456");
+        login.tabla.add("Edson","uno123456");
 
         login.tabla.graphTable();
         login.setVisible(true);
