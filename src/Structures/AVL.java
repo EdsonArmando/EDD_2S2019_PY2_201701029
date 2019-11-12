@@ -7,15 +7,20 @@ package Structures;
 
 import Nodes.NodeAVL;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author EG
  */
 public class AVL {
+    private NodeAVL temp;
     public NodeAVL raiz;
     String inicio = "digraph grafica{nrankdir=TB;\n label=\"Arbol AVL \"; \n node [shape = record, style=filled, fillcolor=seashell2];\n";
     String nodes="";
@@ -132,7 +137,31 @@ public class AVL {
     public LinkedList<NodeAVL> devLista(){
         return this.tempo;
     };
-    
+    public void descargarArchivo(NodeAVL root,String nombre) throws FileNotFoundException, UnsupportedEncodingException{
+        if(root!=null){
+            if(root.nombreArchivo.equals(nombre)){
+                PrintWriter archivo = new PrintWriter(System.getProperty("user.dir")+ "\\" + root.nombreArchivo, "UTF-8");
+                archivo.write(root.contenido);
+                archivo.close();
+                JOptionPane.showMessageDialog(null, "El arhcivo fue creado correctamente");
+                return;
+            }
+            descargarArchivo(root.izquierda,nombre);
+            descargarArchivo(root.derecha,nombre);
+        }
+    }
+    public void get(NodeAVL root, String nombre){
+        if(root!=null){
+            if(root.nombreArchivo.equals(nombre)){
+                temp=root;
+            }
+            get(root.izquierda,nombre);
+            get(root.derecha,nombre);
+        }
+    }
+    public NodeAVL getNode(){
+        return this.temp;
+    }
     public void graphAVL(NodeAVL root){
         
         if (root != null){

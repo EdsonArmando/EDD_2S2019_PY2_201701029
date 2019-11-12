@@ -1,9 +1,5 @@
 digraph grafica{nrankdir=TB;
  label="Arbol AVL "; 
  node [shape = record, style=filled, fillcolor=seashell2];
-"nodoseis" [ label = "<C0>|Carne: seis\n Nombre: seis\n ALT: 2\n Contenido: |<C1>"];
-"nodoocho" [ label = "<C0>|Carne: ocho\n Nombre: ocho\n ALT: 1\n Contenido: |<C1>"];
-"nodosiete" [ label = "<C0>|Carne: siete\n Nombre: siete\n ALT: 1\n Contenido: |<C1>"];
-"nodoseis":C0->"nodoocho"
-"nodoseis":C1->"nodosiete"
+"nodoarqui.csv" [ label = "<C0>|Carne: arqui.csv\n Nombre: arqui.csv\n ALT: 1\n Contenido: |<C1>"];
 }

@@ -105,9 +105,10 @@ public class TablaHash {
         int indice = hashMejor(key);
         if(entries[indice]!=null){
             NodeHash temp = entries[indice];
-             while( !temp.nombreUsuario.equals(key)
-                    && temp.next != null ) {
-                temp = temp.next;
+            if(temp.nombreUsuario.equals(key)){
+                
+            }else{
+                temp = temp.list.getNode(key);
             }
             return temp;
         }

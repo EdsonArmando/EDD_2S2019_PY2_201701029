@@ -5,13 +5,16 @@
  */
 package Structures;
 
+import Nodes.NodoContenido;
 import Nodes.NodoLateral;
+import java.util.LinkedList;
 
 /**
  *
  * @author EG
  */
 public class Lateral {
+    
     public NodoLateral primero;
     NodoLateral ultimo;
     public Lateral(){
@@ -37,6 +40,7 @@ public class Lateral {
         }
     }
     void mostrarDatos() {
+        
         if (!esVacia()) {
             NodoLateral temp = primero;
             while (temp != null)
@@ -44,6 +48,25 @@ public class Lateral {
                 temp = temp.siguiente;
             }
         }
+    }
+    public LinkedList<NodoContenido> devList(String name){
+        LinkedList<NodoContenido> listaCarpetas = new LinkedList<NodoContenido>();
+        NodoContenido tempo=null;
+        if (!esVacia()) {
+            NodoLateral temp = primero;
+            while(temp!=null){
+                if(temp.nombre.equals(name)){
+                    tempo = temp.fila.primero;
+                    while(tempo!=null){
+                        listaCarpetas.add(tempo);
+                        tempo = tempo.derech;
+                    }
+                    return listaCarpetas;
+                }
+                temp = temp.siguiente;
+            }
+        }
+        return null;
     }
     public boolean buscar(String nombre) {
         if (esVacia()) {

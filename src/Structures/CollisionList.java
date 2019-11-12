@@ -35,6 +35,16 @@ public class CollisionList {
         }
         return false;
     }
+    public NodeHash getNode(String username){
+        NodeHash temp = primero;
+        while(temp!=null){
+            if(temp.nombreUsuario.equals(username)){
+                return temp;
+            }
+            temp = temp.next;
+        }
+        return null;
+    }
     public void AddNode(NodeHash newNode){
         if(primero == null){
             ultimo = newNode;

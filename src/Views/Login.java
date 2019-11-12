@@ -3,6 +3,7 @@ package Views;
 import Nodes.NodeAVL;
 import Nodes.NodeHash;
 import Nodes.NodoContenido;
+import Nodes.NodoLateral;
 import Structures.TablaHash;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -161,7 +162,7 @@ public class Login extends javax.swing.JFrame {
         if (log) {
             try {
                 carpeta = new File(System.getProperty("user.dir") + "\\raiz_" + username);
-                MenuUser(username, "/", "home", carpeta);
+                MenuUser(username, "/", "/", carpeta);
             } catch (IOException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
@@ -171,7 +172,11 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Verifique sus Credenciales");
         }
     }//GEN-LAST:event_LoginActionPerformed
+
     public LinkedList<NodeAVL> listadoArchivos(NodoContenido listado) {
+        if(listado==null){
+            return null;
+        }
         listado.avl.tempo.clear();
         listado.avl.reco(listado.raiz);
         LinkedList<NodeAVL> nuevo = listado.avl.devLista();
@@ -183,12 +188,74 @@ public class Login extends javax.swing.JFrame {
         y = 0;
         MenuUsuario Menu = new MenuUsuario(this, hijo);
         NodeHash temporal = tabla.getNodeHash(username);
+        NodoLateral lateral = temporal.matrix.listlat.buscarNodo(hijo);
+        
         NodoContenido nodoMatriz = temporal.matrix.returnNodoMatriz(padre, hijo, padre + "/" + hijo);
         carpetaPadre = hijo;
         Menu.idBienvenida.setText("Bienvenido al sistema " + username);
-        Menu.idDirectorio.setText("..\\" + padre + "\\" + hijo);
+        Menu.idDirectorio.setText(".." + padre  + hijo);
         Menu.idMasivaUsuario.setVisible(false);
         LinkedList<NodeAVL> listado = listadoArchivos(nodoMatriz);
+        LinkedList<NodoContenido> carpetas = temporal.matrix.listlat.devList(hijo);
+        if(carpetas == null || carpetas.size() == 0){
+        
+        }else{
+                for (int i = 0; i < carpetas.size(); i++) {
+                JLabel archivo = new JLabel();
+                archivo.setToolTipText(carpetas.get(i).rutax);
+                archivo.setName(carpetas.get(i).rutax);
+                archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file.png")));
+                archivo.setText(carpetas.get(i).rutax);
+                archivo.setHorizontalTextPosition(JLabel.CENTER);
+                archivo.setVerticalTextPosition(JLabel.BOTTOM);
+                archivo.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        contClik += 1;
+                        nombreFile = archivo.getName();
+                        if (contClik == 2) {
+                            try {
+                                contClik = 0;
+                                MenuUser(username, Menu.nombbre(), nombreFile, carpeta);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+
+                });
+                archivo.setBounds(x, y, 50, 70);
+                y += 75;
+                if (y > 400) {
+                    y = 0;
+                    x += 60;
+                }
+                Menu.panelFile.add(archivo);
+            }
+        }
         if (listado == null || listado.size() == 0) {
             System.out.println("No hay elementos dentro de la carpeta actual");
         } else {
@@ -196,9 +263,9 @@ public class Login extends javax.swing.JFrame {
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(listado.get(i).nombreArchivo);
                 archivo.setName(listado.get(i).nombreArchivo);
-                if(listado.get(i).ieCarpeta==true){
+                if (listado.get(i).ieCarpeta == true) {
                     archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file.png")));
-                }else{
+                } else {
                     archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edd_2s2019_py2_201701029/file2.png")));
                 }
                 archivo.setText(listado.get(i).nombreArchivo);
@@ -258,6 +325,21 @@ public class Login extends javax.swing.JFrame {
 
             }
         });
+        Menu.idArchSubir.addActionListener((new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String nombre = JOptionPane.showInputDialog("Ingres el nombre del archivo");
+                    nodoMatriz.avl.descargarArchivo(nodoMatriz.raiz, nombre);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        }));
         Menu.idMatriz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -267,20 +349,26 @@ public class Login extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         });
-        Menu.idArchEliminar.addActionListener(new ActionListener() {
+        Menu.idArchCompartir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String nombreUser = JOptionPane.showInputDialog("Ingrese el usuario Destino");
+                String archivo = JOptionPane.showInputDialog("Ingrese el nombre del Archvio");
+                nodoMatriz.avl.get(nodoMatriz.raiz, archivo);
+                NodeAVL tem = nodoMatriz.avl.getNode();
+                NodeHash temp = tabla.getNodeHash(nombreUser);
+                NodoContenido temp1 = temp.matrix.returnNodoMatriz("/", "home","");
+                temp1.raiz = temp1.avl.insert(temp1.raiz, tem.nombreArchivo, tem.contenido, false);
             }
         });
         Menu.idArchCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
-                nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "",false);
+                nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "", false);
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(ruta);
                 archivo.setName(ruta);
@@ -358,9 +446,14 @@ public class Login extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ruta = JOptionPane.showInputDialog("Ingrese el nombre de la carpeta");
-                temporal.matrix.insertar(hijo, ruta, hijo + "/" + ruta);
+                if(hijo.equals("/")){
+                    temporal.matrix.insertar(hijo, ruta, hijo + ruta);
+                }else{
+                    temporal.matrix.insertar(hijo, ruta, hijo +"/"+ ruta);
+                }
                 temporal.matrix.insertar(ruta, "", "");
-                nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "",true);
+                //No se insera en avl al carpeta solo matriz
+                //nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "", true);
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(ruta);
                 archivo.setName(ruta);
@@ -446,7 +539,7 @@ public class Login extends javax.swing.JFrame {
                 for (String line : archivos) {
                     if (line != "") {
                         String[] datos = line.split(",");
-                        nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, datos[0], datos[1],false);
+                        nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, datos[0], datos[1], false);
                         JLabel archivo = new JLabel();
                         archivo.setToolTipText(datos[0]);
                         archivo.setName(datos[0]);
@@ -515,11 +608,11 @@ public class Login extends javax.swing.JFrame {
         Menu.setLocationRelativeTo(null);
     }
 
-    public void crearArchivo(File ruta, String file) throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter archivo = new PrintWriter(ruta.getAbsoluteFile() + "\\" + file, "UTF-8");
-
+    public void crearArchivo(NodeAVL file) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter archivo = new PrintWriter(System.getProperty("user.dir")+ "\\" + file.nombreArchivo, "UTF-8");
+        archivo.write(file.contenido);
+        archivo.close();
     }
-
     public void crearCarpeta(String ruta, String username, File carpeta) {
         directorio = new File(carpeta.getAbsoluteFile() + "\\" + ruta);
         if (!directorio.exists()) {
@@ -632,7 +725,7 @@ public class Login extends javax.swing.JFrame {
     public String[] cargaMasiva(String ruta, String tipo) {
         String texto = "";
         String aux = "";
-        File abre = new File("duplicado.csv");
+        File abre = new File(ruta);
         FileReader archivos = null;
         try {
             archivos = new FileReader(abre);

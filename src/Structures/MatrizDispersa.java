@@ -28,7 +28,7 @@ public class MatrizDispersa {
         listaCab = new Cabecera();
         listlat = new Lateral();
     }
-
+    
     public void insertar(String rutay, String rutax, String nombre) {
         NodoContenido nuevo = new NodoContenido(nombre, rutax, rutay);
         if (listaCab.buscar(rutax) == false) {
@@ -68,7 +68,6 @@ public class MatrizDispersa {
         }
         return null;
     }
-
     public void graficarMatriz() throws IOException {
         int cont = 2;
         String relaciones = "";
