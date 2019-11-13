@@ -12,8 +12,8 @@ import Nodes.NodeHash;
  * @author EG
  */
 public class CollisionList {
-    private NodeHash primero;
-    private NodeHash ultimo;
+    public NodeHash primero;
+    public NodeHash ultimo;
     private int cont = 0;
     /*
     Retorna true si la lista esta vacia y false sino.
@@ -56,6 +56,16 @@ public class CollisionList {
         }
         cont++;
     }
+    public NodeHash getNodo(String nombre){
+        NodeHash temp = primero;
+        while(temp!=null){
+            if(temp.nombreUsuario.equals(nombre)){
+                return temp;
+            }
+            temp = temp.next;
+        }
+        return null;
+    }
     public String recorrer(int indice){
         NodeHash temp;
         String data="";
@@ -69,6 +79,7 @@ public class CollisionList {
                 if (cont==0){
                     data += "node_"+String.valueOf(indice)+":p -> node_"+String.valueOf(temp.indice)+"_L"+String.valueOf(cont)+":n;\n";
                 }else{
+                    /*Arreglar*/
                     data += "node_"+String.valueOf(temp.indice)+"_L"+String.valueOf(cont-1)+":p -> node_"+String.valueOf(temp.indice)+"_L"+String.valueOf(cont)+":n;\n";
                 }
                 

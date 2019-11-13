@@ -28,15 +28,9 @@ public class EDD_2S2019_PY2_201701029 {
     public static void main(String[] args) throws IOException {
         
         Login login = new Login();
-        login.tabla.add("Juan123","MiContrasena");
-        login.tabla.add("Ricardo123","Dos456212");
-        login.tabla.add("Pedro456","Tres123456");
-        login.tabla.add("Antinio","cinco123456");
         login.tabla.add("Pero","cuatro123456");
         login.tabla.add("admin","admin123456");
         login.tabla.add("Edson","uno123456");
-
-        login.tabla.graphTable();
         login.setVisible(true);
         login.setLocationRelativeTo(null);
     }

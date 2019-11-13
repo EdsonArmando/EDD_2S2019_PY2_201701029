@@ -195,6 +195,7 @@ public class Login extends javax.swing.JFrame {
         Menu.idBienvenida.setText("Bienvenido al sistema " + username);
         Menu.idDirectorio.setText(".." + padre  + hijo);
         Menu.idMasivaUsuario.setVisible(false);
+        Menu.idHash.setVisible(false);
         LinkedList<NodeAVL> listado = listadoArchivos(nodoMatriz);
         LinkedList<NodoContenido> carpetas = temporal.matrix.listlat.devList(hijo);
         if(carpetas == null || carpetas.size() == 0){
@@ -519,7 +520,21 @@ public class Login extends javax.swing.JFrame {
 
         });
         if (username.equals("admin")) {
+            Menu.idHash.setVisible(true);
             Menu.idMasivaUsuario.setVisible(true);
+            Menu.idHash.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        tabla.graphTable();
+                        Runtime.getRuntime().exec("cmd /c Hash.png", null, new File(System.getProperty("user.dir")));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            
+            });
             Menu.idMasivaUsuario.addActionListener(new ActionListener() {
 
                 @Override
@@ -530,6 +545,18 @@ public class Login extends javax.swing.JFrame {
 
             });
         }
+        Menu.idGrafo.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    temporal.matrix.graficarGrafo();
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        });
         Menu.idMasivaArch.addActionListener(new ActionListener() {
 
             @Override

@@ -1,0 +1,11 @@
+graph {
+    rankdir=LR;
+"/" -- { "home"  "Disco"  "Documents"  "Videos" };
+"Disco" -- { "VENDOR" };
+"Documents" -- {};
+"Videos" -- { "View" };
+"VENDOR" -- {};
+"View" -- { "Mundo" };
+"Mundo" -- {};
+
+}

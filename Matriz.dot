@@ -2,72 +2,96 @@ digraph Grafica {
 node[shape=record,style=filled] 
 "RAIZ-1-1"[label ="{RAIZ}",group = 1]
  "Fila:/-1/"[label ="/" ,group = 1 ]
-"Fila:carpe-1carpe"[label ="carpe" ,group = 1 ]
-"Fila:nueva2-1nueva2"[label ="nueva2" ,group = 1 ]
-"Fila:nuevo-1nuevo"[label ="nuevo" ,group = 1 ]
-"Fila:Hime-1Hime"[label ="Hime" ,group = 1 ]
+"Fila:Disco-1Disco"[label ="Disco" ,group = 1 ]
+"Fila:Documents-1Documents"[label ="Documents" ,group = 1 ]
+"Fila:Videos-1Videos"[label ="Videos" ,group = 1 ]
+"Fila:VENDOR-1VENDOR"[label ="VENDOR" ,group = 1 ]
+"Fila:View-1View"[label ="View" ,group = 1 ]
+"Fila:Mundo-1Mundo"[label ="Mundo" ,group = 1 ]
 "COL:/-1/"[label ="/" ,group =2]
 "COL:home-1home"[label ="home" ,group =3]
 "/home-home/"[label ="/home" ,group = 3 ]
-"COL:carpe-1carpe"[label ="carpe" ,group =4]
-"/carpe-carpe/"[label ="/carpe" ,group = 4 ]
-"COL:nueva2-1nueva2"[label ="nueva2" ,group =5]
-"/nueva2-nueva2/"[label ="/nueva2" ,group = 5 ]
-"COL:nuevo-1nuevo"[label ="nuevo" ,group =6]
-"/nuevo-nuevo/"[label ="/nuevo" ,group = 6 ]
-"COL:Hime-1Hime"[label ="Hime" ,group =7]
-"carpe/Hime-Himecarpe"[label ="carpe/Hime" ,group = 7 ]
+"COL:Disco-1Disco"[label ="Disco" ,group =4]
+"/Disco-Disco/"[label ="/Disco" ,group = 4 ]
+"COL:Documents-1Documents"[label ="Documents" ,group =5]
+"/Documents-Documents/"[label ="/Documents" ,group = 5 ]
+"COL:Videos-1Videos"[label ="Videos" ,group =6]
+"/Videos-Videos/"[label ="/Videos" ,group = 6 ]
+"COL:VENDOR-1VENDOR"[label ="VENDOR" ,group =7]
+"Disco/VENDOR-VENDORDisco"[label ="Disco/VENDOR" ,group = 7 ]
+"COL:View-1View"[label ="View" ,group =8]
+"Videos/View-ViewVideos"[label ="Videos/View" ,group = 8 ]
+"COL:Mundo-1Mundo"[label ="Mundo" ,group =9]
+"View/Mundo-MundoView"[label ="View/Mundo" ,group = 9 ]
 
 
-{rank = same;"Fila:/-1/";"/home-home/";"/carpe-carpe/";"/nueva2-nueva2/";"/nuevo-nuevo/";}
-{rank = same;"Fila:carpe-1carpe";"carpe/Hime-Himecarpe";}
-{rank = same;"Fila:nueva2-1nueva2";}
-{rank = same;"Fila:nuevo-1nuevo";}
-{rank = same;"Fila:Hime-1Hime";}
-{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:carpe-1carpe";"COL:nueva2-1nueva2";"COL:nuevo-1nuevo";"COL:Hime-1Hime";}
+{rank = same;"Fila:/-1/";"/home-home/";"/Disco-Disco/";"/Documents-Documents/";"/Videos-Videos/";}
+{rank = same;"Fila:Disco-1Disco";"Disco/VENDOR-VENDORDisco";}
+{rank = same;"Fila:Documents-1Documents";}
+{rank = same;"Fila:Videos-1Videos";"Videos/View-ViewVideos";}
+{rank = same;"Fila:VENDOR-1VENDOR";}
+{rank = same;"Fila:View-1View";"View/Mundo-MundoView";}
+{rank = same;"Fila:Mundo-1Mundo";}
+{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:Disco-1Disco";"COL:Documents-1Documents";"COL:Videos-1Videos";"COL:VENDOR-1VENDOR";"COL:View-1View";"COL:Mundo-1Mundo";}
 
 
 "RAIZ-1-1" -> "Fila:/-1/"
 "RAIZ-1-1" -> "Fila:/-1/"[dir=back]
 "Fila:/-1/"->"/home-home/"
 "Fila:/-1/"->"/home-home/"[dir=back]
-"Fila:/-1/"->"Fila:carpe-1carpe"
-"Fila:/-1/"->"Fila:carpe-1carpe"[dir=back]
-"/home-home/"->"/carpe-carpe/"
-"/home-home/"->"/carpe-carpe/"[dir=back]
-"/carpe-carpe/"->"/nueva2-nueva2/"
-"/carpe-carpe/"->"/nueva2-nueva2/"[dir=back]
-"/nueva2-nueva2/"->"/nuevo-nuevo/"
-"/nueva2-nueva2/"->"/nuevo-nuevo/"[dir=back]
-"Fila:carpe-1carpe"->"carpe/Hime-Himecarpe"
-"Fila:carpe-1carpe"->"carpe/Hime-Himecarpe"[dir=back]
-"Fila:carpe-1carpe"->"Fila:nueva2-1nueva2"
-"Fila:carpe-1carpe"->"Fila:nueva2-1nueva2"[dir=back]
-"Fila:nueva2-1nueva2"->"Fila:nuevo-1nuevo"
-"Fila:nueva2-1nueva2"->"Fila:nuevo-1nuevo"[dir=back]
-"Fila:nuevo-1nuevo"->"Fila:Hime-1Hime"
-"Fila:nuevo-1nuevo"->"Fila:Hime-1Hime"[dir=back]
+"Fila:/-1/"->"Fila:Disco-1Disco"
+"Fila:/-1/"->"Fila:Disco-1Disco"[dir=back]
+"/home-home/"->"/Disco-Disco/"
+"/home-home/"->"/Disco-Disco/"[dir=back]
+"/Disco-Disco/"->"/Documents-Documents/"
+"/Disco-Disco/"->"/Documents-Documents/"[dir=back]
+"/Documents-Documents/"->"/Videos-Videos/"
+"/Documents-Documents/"->"/Videos-Videos/"[dir=back]
+"Fila:Disco-1Disco"->"Disco/VENDOR-VENDORDisco"
+"Fila:Disco-1Disco"->"Disco/VENDOR-VENDORDisco"[dir=back]
+"Fila:Disco-1Disco"->"Fila:Documents-1Documents"
+"Fila:Disco-1Disco"->"Fila:Documents-1Documents"[dir=back]
+"Fila:Documents-1Documents"->"Fila:Videos-1Videos"
+"Fila:Documents-1Documents"->"Fila:Videos-1Videos"[dir=back]
+"Fila:Videos-1Videos"->"Videos/View-ViewVideos"
+"Fila:Videos-1Videos"->"Videos/View-ViewVideos"[dir=back]
+"Fila:Videos-1Videos"->"Fila:VENDOR-1VENDOR"
+"Fila:Videos-1Videos"->"Fila:VENDOR-1VENDOR"[dir=back]
+"Fila:VENDOR-1VENDOR"->"Fila:View-1View"
+"Fila:VENDOR-1VENDOR"->"Fila:View-1View"[dir=back]
+"Fila:View-1View"->"View/Mundo-MundoView"
+"Fila:View-1View"->"View/Mundo-MundoView"[dir=back]
+"Fila:View-1View"->"Fila:Mundo-1Mundo"
+"Fila:View-1View"->"Fila:Mundo-1Mundo"[dir=back]
 "RAIZ-1-1" -> "COL:/-1/"
 "RAIZ-1-1" -> "COL:/-1/"[dir=back]
 "COL:/-1/"->"COL:home-1home"
 "COL:/-1/"->"COL:home-1home"[dir=back]
 "COL:home-1home"->"/home-home/"
 "COL:home-1home"->"/home-home/"[dir=back]
-"COL:home-1home"->"COL:carpe-1carpe"
-"COL:home-1home"->"COL:carpe-1carpe"[dir=back]
-"COL:carpe-1carpe"->"/carpe-carpe/"
-"COL:carpe-1carpe"->"/carpe-carpe/"[dir=back]
-"COL:carpe-1carpe"->"COL:nueva2-1nueva2"
-"COL:carpe-1carpe"->"COL:nueva2-1nueva2"[dir=back]
-"COL:nueva2-1nueva2"->"/nueva2-nueva2/"
-"COL:nueva2-1nueva2"->"/nueva2-nueva2/"[dir=back]
-"COL:nueva2-1nueva2"->"COL:nuevo-1nuevo"
-"COL:nueva2-1nueva2"->"COL:nuevo-1nuevo"[dir=back]
-"COL:nuevo-1nuevo"->"/nuevo-nuevo/"
-"COL:nuevo-1nuevo"->"/nuevo-nuevo/"[dir=back]
-"COL:nuevo-1nuevo"->"COL:Hime-1Hime"
-"COL:nuevo-1nuevo"->"COL:Hime-1Hime"[dir=back]
-"COL:Hime-1Hime"->"carpe/Hime-Himecarpe"
-"COL:Hime-1Hime"->"carpe/Hime-Himecarpe"[dir=back]
+"COL:home-1home"->"COL:Disco-1Disco"
+"COL:home-1home"->"COL:Disco-1Disco"[dir=back]
+"COL:Disco-1Disco"->"/Disco-Disco/"
+"COL:Disco-1Disco"->"/Disco-Disco/"[dir=back]
+"COL:Disco-1Disco"->"COL:Documents-1Documents"
+"COL:Disco-1Disco"->"COL:Documents-1Documents"[dir=back]
+"COL:Documents-1Documents"->"/Documents-Documents/"
+"COL:Documents-1Documents"->"/Documents-Documents/"[dir=back]
+"COL:Documents-1Documents"->"COL:Videos-1Videos"
+"COL:Documents-1Documents"->"COL:Videos-1Videos"[dir=back]
+"COL:Videos-1Videos"->"/Videos-Videos/"
+"COL:Videos-1Videos"->"/Videos-Videos/"[dir=back]
+"COL:Videos-1Videos"->"COL:VENDOR-1VENDOR"
+"COL:Videos-1Videos"->"COL:VENDOR-1VENDOR"[dir=back]
+"COL:VENDOR-1VENDOR"->"Disco/VENDOR-VENDORDisco"
+"COL:VENDOR-1VENDOR"->"Disco/VENDOR-VENDORDisco"[dir=back]
+"COL:VENDOR-1VENDOR"->"COL:View-1View"
+"COL:VENDOR-1VENDOR"->"COL:View-1View"[dir=back]
+"COL:View-1View"->"Videos/View-ViewVideos"
+"COL:View-1View"->"Videos/View-ViewVideos"[dir=back]
+"COL:View-1View"->"COL:Mundo-1Mundo"
+"COL:View-1View"->"COL:Mundo-1Mundo"[dir=back]
+"COL:Mundo-1Mundo"->"View/Mundo-MundoView"
+"COL:Mundo-1Mundo"->"View/Mundo-MundoView"[dir=back]
 
 }

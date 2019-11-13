@@ -1,5 +1,5 @@
 digraph grafica{nrankdir=TB;
  label="Arbol AVL "; 
  node [shape = record, style=filled, fillcolor=seashell2];
-"nodoarqui.csv" [ label = "<C0>|Carne: arqui.csv\n Nombre: arqui.csv\n ALT: 1\n Contenido: |<C1>"];
+"nodoArchivo11" [ label = "<C0>|Carne: Archivo11\n Nombre: Archivo11\n ALT: 1\n Contenido: |<C1>"];
 }

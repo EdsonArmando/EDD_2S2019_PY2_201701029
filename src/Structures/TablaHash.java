@@ -52,13 +52,32 @@ public class TablaHash {
 		return (Math.abs(sum) % this.size);
 	}
     /*
+    Aumentar tamaño tabla
+    */
+    public boolean aumentar(int numero){
+        int contador = 2;
+        boolean primo=true;
+        while ((primo) && (contador!=numero)){
+          if (numero % contador == 0)
+            primo = false;
+          contador++;
+        }
+        return primo;
+    }
+    /*
     Agregar nuevo elemento a la tabla Hash
     */
     public void add(String key,String value){
         if(value.length()>8){
             if(porcentaje()>75){
-            this.size=16;
-            NodeHash[] nueva = reubicarNodos();
+            Boolean esPrimo = false;
+            int numero=this.size;
+            while(esPrimo==false){
+                numero++;
+                esPrimo = aumentar(numero);
+            }
+            this.size=numero;
+            NodeHash[] nueva = reubicarNodos(null);
             entries = nueva;
             }
             int indice = hashMejor(key);
@@ -168,23 +187,44 @@ public class TablaHash {
     private int numeroPrimo(Integer numero){
         return 0;
     }
-    private NodeHash[] reubicarNodos() {
+    private NodeHash[] reubicarNodos(NodeHash ingreso) {
         NodeHash[] nueva = new NodeHash[500];
         for(NodeHash item : entries){
-           if(item!=null){
-            int indice = hashMejor(item.nombreUsuario);
-            final NodeHash hashEntry = new NodeHash(item.nombreUsuario, item.contrasenia,indice);
-            hashEntry.matrix = item.matrix;
-            if(nueva[indice]==null){
-                nueva[indice] = hashEntry;
-            }
-            /*
-                En caso que exista una colision
-            */
-            else{
-                NodeHash temp = nueva[indice];
-                temp.list.AddNode(hashEntry);
-            }
+            if(item!=null){
+                int indice = hashMejor(item.nombreUsuario);
+                final NodeHash hashEntry = new NodeHash(item.nombreUsuario, item.contrasenia,indice);
+                hashEntry.matrix = item.matrix;
+                if(item.list.esVacia()){
+                }else{
+                    NodeHash temp = item.list.primero;
+                    while(temp!=null){
+                        int index = hashMejor(temp.nombreUsuario);
+                        NodeHash var = new NodeHash(temp.nombreUsuario, temp.contrasenia,index);
+                        var.matrix = temp.matrix;
+                        if(nueva[index]==null){
+                            nueva[index] = var;
+                        }
+                        /*
+                            En caso que exista una colision
+                        */
+                        else{
+                            NodeHash tempo = nueva[index];
+                            tempo.list.AddNode(var);
+                        }
+                        temp=temp.next;
+                    }
+                }
+                //hashEntry.list = item.list;
+                if(nueva[indice]==null){
+                    nueva[indice] = hashEntry;
+                }
+                /*
+                    En caso que exista una colision
+                */
+                else{
+                    NodeHash temp = nueva[indice];
+                    temp.list.AddNode(hashEntry);
+                }
            }
         }
         return nueva;

@@ -68,6 +68,27 @@ public class MatrizDispersa {
         }
         return null;
     }
+    public void graficarGrafo() throws IOException{
+        NodoLateral temp = listlat.primero;
+        NodoContenido temp1 = null;
+        FileWriter file = new FileWriter("Grafo.dot");
+        file.write("graph {\n" +
+        "    rankdir=LR;\n");
+        while(temp!=null){
+            temp1 = temp.fila.primero;
+            file.write("\""+ temp.nombre+"\"");
+            file.write(" -- {");
+            while(temp1!=null){
+                file.write(" \""+ temp1.rutax+"\" ");
+                temp1 = temp1.derech;
+            }
+            file.write("};\n");
+            temp = temp.siguiente;
+        }
+        file.write("\n}");
+        file.close();
+        Runtime.getRuntime().exec("cmd /c dot -Tpng Grafo.dot -o grafo.png", null, new File(System.getProperty("user.dir")));
+    }
     public void graficarMatriz() throws IOException {
         int cont = 2;
         String relaciones = "";
