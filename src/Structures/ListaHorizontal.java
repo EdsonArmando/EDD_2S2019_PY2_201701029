@@ -6,6 +6,7 @@
 package Structures;
 
 import Nodes.NodoContenido;
+import Nodes.NodoLateral;
 
 /**
  *
@@ -38,6 +39,36 @@ public class ListaHorizontal {
                 insertarAlFinal(nuevo);
                 
             }
+        }
+    }
+    public void Eliminar(String x, String padre){
+        NodoContenido temp=primero;
+        NodoContenido borrar=null;
+        String rut="";
+        if(padre.equals("/")){
+            rut = padre+x;
+        }else{
+            rut = padre + "/" + x;
+        }
+        while (temp!=null)
+        {
+            if (temp.ruta.equals(rut)) {
+                if(temp==primero){
+                    primero = primero.derech;
+                    primero.izqui = null;
+                }else{
+                    borrar.derech = temp.derech;
+                    try{
+                        temp.derech.izqui = temp.izqui;
+                    }catch(Exception c){}
+                    
+                }
+            }
+            try{
+                borrar = temp;
+                temp = temp.derech;
+            }catch(Exception e){}
+            
         }
     }
      void insertarAlFinal(NodoContenido nuevo) {

@@ -6,6 +6,7 @@
 package Structures;
 
 import Nodes.NodoCabecera;
+import Nodes.NodoLateral;
 
 /**
  *
@@ -34,6 +35,30 @@ public class Cabecera {
             if (nuevo.nombre!=null) {
                 insertarAlFinal(nuevo);
             }
+        }
+    }
+    public void Eliminar(String x, String padre){
+        NodoCabecera temp=primero;
+        NodoCabecera borrar=null;
+        while (temp!=null)
+        {
+            if (temp.nombre.equals(x)) {
+                if(temp==primero){
+                    primero = primero.siguiente;
+                    primero.anterior = null;
+                }else{
+                    borrar.siguiente = temp.siguiente;
+                    try{
+                        temp.siguiente.anterior = temp.anterior;
+                    }catch(Exception z){}
+                    
+                }
+            }
+            try{
+                borrar = temp;
+                temp = temp.siguiente;
+            }catch(Exception e){}
+            
         }
     }
     void mostrarDatos() {

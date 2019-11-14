@@ -1,5 +1,13 @@
 digraph grafica{nrankdir=TB;
  label="Arbol AVL "; 
  node [shape = record, style=filled, fillcolor=seashell2];
-"nodoArchivo11" [ label = "<C0>|Carne: Archivo11\n Nombre: Archivo11\n ALT: 1\n Contenido: |<C1>"];
+"nodouno.txt" [ label = "<C0>|Carne: uno.txt\n Nombre: uno.txt\n ALT: 3\n Contenido: juan123456|<C1>"];
+"nododos.txt" [ label = "<C0>|Carne: dos.txt\n Nombre: dos.txt\n ALT: 1\n Contenido: seis45678|<C1>"];
+"nodochro.txt" [ label = "<C0>|Carne: chro.txt\n Nombre: chro.txt\n ALT: 2\n Contenido: uno123456|<C1>"];
+"nodoJuan.csv" [ label = "<C0>|Carne: Juan.csv\n Nombre: Juan.csv\n ALT: 1\n Contenido: |<C1>"];
+"nodoEdson.alv" [ label = "<C0>|Carne: Edson.alv\n Nombre: Edson.alv\n ALT: 1\n Contenido: los782136|<C1>"];
+"nodouno.txt":C0->"nododos.txt"
+"nodouno.txt":C1->"nodochro.txt"
+"nodochro.txt":C0->"nodoJuan.csv"
+"nodochro.txt":C1->"nodoEdson.alv"
 }

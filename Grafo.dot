@@ -1,11 +1,7 @@
-graph {
-    rankdir=LR;
-"/" -- { "home"  "Disco"  "Documents"  "Videos" };
-"Disco" -- { "VENDOR" };
-"Documents" -- {};
-"Videos" -- { "View" };
-"VENDOR" -- {};
-"View" -- { "Mundo" };
-"Mundo" -- {};
+digraph  {
+"/" -> { "home"  "Estructuras"  "Edd" };
+"Estructuras" -> {};
+"Edd" -> {};
+"Head" -> {};
 
 }

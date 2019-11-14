@@ -2,96 +2,60 @@ digraph Grafica {
 node[shape=record,style=filled] 
 "RAIZ-1-1"[label ="{RAIZ}",group = 1]
  "Fila:/-1/"[label ="/" ,group = 1 ]
-"Fila:Disco-1Disco"[label ="Disco" ,group = 1 ]
-"Fila:Documents-1Documents"[label ="Documents" ,group = 1 ]
-"Fila:Videos-1Videos"[label ="Videos" ,group = 1 ]
-"Fila:VENDOR-1VENDOR"[label ="VENDOR" ,group = 1 ]
-"Fila:View-1View"[label ="View" ,group = 1 ]
-"Fila:Mundo-1Mundo"[label ="Mundo" ,group = 1 ]
+"Fila:Unod-1Unod"[label ="Unod" ,group = 1 ]
+"Fila:Tres-1Tres"[label ="Tres" ,group = 1 ]
+"Fila:Mike-1Mike"[label ="Mike" ,group = 1 ]
 "COL:/-1/"[label ="/" ,group =2]
 "COL:home-1home"[label ="home" ,group =3]
 "/home-home/"[label ="/home" ,group = 3 ]
-"COL:Disco-1Disco"[label ="Disco" ,group =4]
-"/Disco-Disco/"[label ="/Disco" ,group = 4 ]
-"COL:Documents-1Documents"[label ="Documents" ,group =5]
-"/Documents-Documents/"[label ="/Documents" ,group = 5 ]
-"COL:Videos-1Videos"[label ="Videos" ,group =6]
-"/Videos-Videos/"[label ="/Videos" ,group = 6 ]
-"COL:VENDOR-1VENDOR"[label ="VENDOR" ,group =7]
-"Disco/VENDOR-VENDORDisco"[label ="Disco/VENDOR" ,group = 7 ]
-"COL:View-1View"[label ="View" ,group =8]
-"Videos/View-ViewVideos"[label ="Videos/View" ,group = 8 ]
-"COL:Mundo-1Mundo"[label ="Mundo" ,group =9]
-"View/Mundo-MundoView"[label ="View/Mundo" ,group = 9 ]
+"COL:Unod-1Unod"[label ="Unod" ,group =4]
+"/Unod-Unod/"[label ="/Unod" ,group = 4 ]
+"COL:Tres-1Tres"[label ="Tres" ,group =5]
+"/Tres-Tres/"[label ="/Tres" ,group = 5 ]
+"COL:Mike-1Mike"[label ="Mike" ,group =6]
+"/Mike-Mike/"[label ="/Mike" ,group = 6 ]
 
 
-{rank = same;"Fila:/-1/";"/home-home/";"/Disco-Disco/";"/Documents-Documents/";"/Videos-Videos/";}
-{rank = same;"Fila:Disco-1Disco";"Disco/VENDOR-VENDORDisco";}
-{rank = same;"Fila:Documents-1Documents";}
-{rank = same;"Fila:Videos-1Videos";"Videos/View-ViewVideos";}
-{rank = same;"Fila:VENDOR-1VENDOR";}
-{rank = same;"Fila:View-1View";"View/Mundo-MundoView";}
-{rank = same;"Fila:Mundo-1Mundo";}
-{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:Disco-1Disco";"COL:Documents-1Documents";"COL:Videos-1Videos";"COL:VENDOR-1VENDOR";"COL:View-1View";"COL:Mundo-1Mundo";}
+{rank = same;"Fila:/-1/";"/home-home/";"/Unod-Unod/";"/Tres-Tres/";"/Mike-Mike/";}
+{rank = same;"Fila:Unod-1Unod";}
+{rank = same;"Fila:Tres-1Tres";}
+{rank = same;"Fila:Mike-1Mike";}
+{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:Unod-1Unod";"COL:Tres-1Tres";"COL:Mike-1Mike";}
 
 
 "RAIZ-1-1" -> "Fila:/-1/"
 "RAIZ-1-1" -> "Fila:/-1/"[dir=back]
 "Fila:/-1/"->"/home-home/"
 "Fila:/-1/"->"/home-home/"[dir=back]
-"Fila:/-1/"->"Fila:Disco-1Disco"
-"Fila:/-1/"->"Fila:Disco-1Disco"[dir=back]
-"/home-home/"->"/Disco-Disco/"
-"/home-home/"->"/Disco-Disco/"[dir=back]
-"/Disco-Disco/"->"/Documents-Documents/"
-"/Disco-Disco/"->"/Documents-Documents/"[dir=back]
-"/Documents-Documents/"->"/Videos-Videos/"
-"/Documents-Documents/"->"/Videos-Videos/"[dir=back]
-"Fila:Disco-1Disco"->"Disco/VENDOR-VENDORDisco"
-"Fila:Disco-1Disco"->"Disco/VENDOR-VENDORDisco"[dir=back]
-"Fila:Disco-1Disco"->"Fila:Documents-1Documents"
-"Fila:Disco-1Disco"->"Fila:Documents-1Documents"[dir=back]
-"Fila:Documents-1Documents"->"Fila:Videos-1Videos"
-"Fila:Documents-1Documents"->"Fila:Videos-1Videos"[dir=back]
-"Fila:Videos-1Videos"->"Videos/View-ViewVideos"
-"Fila:Videos-1Videos"->"Videos/View-ViewVideos"[dir=back]
-"Fila:Videos-1Videos"->"Fila:VENDOR-1VENDOR"
-"Fila:Videos-1Videos"->"Fila:VENDOR-1VENDOR"[dir=back]
-"Fila:VENDOR-1VENDOR"->"Fila:View-1View"
-"Fila:VENDOR-1VENDOR"->"Fila:View-1View"[dir=back]
-"Fila:View-1View"->"View/Mundo-MundoView"
-"Fila:View-1View"->"View/Mundo-MundoView"[dir=back]
-"Fila:View-1View"->"Fila:Mundo-1Mundo"
-"Fila:View-1View"->"Fila:Mundo-1Mundo"[dir=back]
+"Fila:/-1/"->"Fila:Unod-1Unod"
+"Fila:/-1/"->"Fila:Unod-1Unod"[dir=back]
+"/home-home/"->"/Unod-Unod/"
+"/home-home/"->"/Unod-Unod/"[dir=back]
+"/Unod-Unod/"->"/Tres-Tres/"
+"/Unod-Unod/"->"/Tres-Tres/"[dir=back]
+"/Tres-Tres/"->"/Mike-Mike/"
+"/Tres-Tres/"->"/Mike-Mike/"[dir=back]
+"Fila:Unod-1Unod"->"Fila:Tres-1Tres"
+"Fila:Unod-1Unod"->"Fila:Tres-1Tres"[dir=back]
+"Fila:Tres-1Tres"->"Fila:Mike-1Mike"
+"Fila:Tres-1Tres"->"Fila:Mike-1Mike"[dir=back]
 "RAIZ-1-1" -> "COL:/-1/"
 "RAIZ-1-1" -> "COL:/-1/"[dir=back]
 "COL:/-1/"->"COL:home-1home"
 "COL:/-1/"->"COL:home-1home"[dir=back]
 "COL:home-1home"->"/home-home/"
 "COL:home-1home"->"/home-home/"[dir=back]
-"COL:home-1home"->"COL:Disco-1Disco"
-"COL:home-1home"->"COL:Disco-1Disco"[dir=back]
-"COL:Disco-1Disco"->"/Disco-Disco/"
-"COL:Disco-1Disco"->"/Disco-Disco/"[dir=back]
-"COL:Disco-1Disco"->"COL:Documents-1Documents"
-"COL:Disco-1Disco"->"COL:Documents-1Documents"[dir=back]
-"COL:Documents-1Documents"->"/Documents-Documents/"
-"COL:Documents-1Documents"->"/Documents-Documents/"[dir=back]
-"COL:Documents-1Documents"->"COL:Videos-1Videos"
-"COL:Documents-1Documents"->"COL:Videos-1Videos"[dir=back]
-"COL:Videos-1Videos"->"/Videos-Videos/"
-"COL:Videos-1Videos"->"/Videos-Videos/"[dir=back]
-"COL:Videos-1Videos"->"COL:VENDOR-1VENDOR"
-"COL:Videos-1Videos"->"COL:VENDOR-1VENDOR"[dir=back]
-"COL:VENDOR-1VENDOR"->"Disco/VENDOR-VENDORDisco"
-"COL:VENDOR-1VENDOR"->"Disco/VENDOR-VENDORDisco"[dir=back]
-"COL:VENDOR-1VENDOR"->"COL:View-1View"
-"COL:VENDOR-1VENDOR"->"COL:View-1View"[dir=back]
-"COL:View-1View"->"Videos/View-ViewVideos"
-"COL:View-1View"->"Videos/View-ViewVideos"[dir=back]
-"COL:View-1View"->"COL:Mundo-1Mundo"
-"COL:View-1View"->"COL:Mundo-1Mundo"[dir=back]
-"COL:Mundo-1Mundo"->"View/Mundo-MundoView"
-"COL:Mundo-1Mundo"->"View/Mundo-MundoView"[dir=back]
+"COL:home-1home"->"COL:Unod-1Unod"
+"COL:home-1home"->"COL:Unod-1Unod"[dir=back]
+"COL:Unod-1Unod"->"/Unod-Unod/"
+"COL:Unod-1Unod"->"/Unod-Unod/"[dir=back]
+"COL:Unod-1Unod"->"COL:Tres-1Tres"
+"COL:Unod-1Unod"->"COL:Tres-1Tres"[dir=back]
+"COL:Tres-1Tres"->"/Tres-Tres/"
+"COL:Tres-1Tres"->"/Tres-Tres/"[dir=back]
+"COL:Tres-1Tres"->"COL:Mike-1Mike"
+"COL:Tres-1Tres"->"COL:Mike-1Mike"[dir=back]
+"COL:Mike-1Mike"->"/Mike-Mike/"
+"COL:Mike-1Mike"->"/Mike-Mike/"[dir=back]
 
 }

@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class AVL {
     private NodeAVL temp;
+    public  NodeAVL raizNueva;
     public NodeAVL raiz;
     String inicio = "digraph grafica{nrankdir=TB;\n label=\"Arbol AVL \"; \n node [shape = record, style=filled, fillcolor=seashell2];\n";
     String nodes="";
@@ -134,6 +135,33 @@ public class AVL {
             reco(root.derecha);
         }
     }
+    public void Eliminar( NodeAVL root,String nombre){
+        if(root!=null){
+            if(root.nombreArchivo.equals(nombre)){
+               
+            }else{
+                raizNueva = insert(raizNueva,root.nombreArchivo,root.contenido,root.ieCarpeta);
+            }
+            Eliminar(root.izquierda,nombre);
+            Eliminar(root.derecha,nombre);
+        }
+    }
+    public void Modificar( NodeAVL root,String nombre, String nombreNuevo){
+        if(root!=null){
+            if(root.nombreArchivo.equals(nombre)){
+                
+               raizNueva = insert(raizNueva,nombreNuevo,root.contenido,root.ieCarpeta);
+            }else{
+                raizNueva = insert(raizNueva,root.nombreArchivo,root.contenido,root.ieCarpeta);
+            }
+            Modificar(root.izquierda,nombre, nombreNuevo);
+            Modificar(root.derecha,nombre,nombreNuevo);
+        }
+    }
+    public NodeAVL  NuevaRaiz(){
+        return this.raizNueva;
+    }
+    
     public LinkedList<NodeAVL> devLista(){
         return this.tempo;
     };

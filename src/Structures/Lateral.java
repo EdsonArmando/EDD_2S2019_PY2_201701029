@@ -90,6 +90,32 @@ public class Lateral {
     public String retorPrimer() {
         return primero.nombre;
     }
+    public void Eliminar(String x, String padre){
+        NodoLateral temp=primero;
+        NodoLateral borrar=null;
+        while (temp!=null)
+        {
+            if(temp.nombre.equals(padre)){
+                temp.fila.Eliminar(x, padre);
+            }
+            if (temp.nombre.equals(x)) {
+                
+                if(temp==primero){
+                    primero = primero.siguiente;
+                    primero.anterior = null;
+                }else{
+                    borrar.siguiente = temp.siguiente;
+                    try{
+                        temp.siguiente.anterior = temp.anterior;
+                    }catch(Exception z){}
+                    
+                }
+                
+            }
+            borrar = temp;
+            temp = temp.siguiente;
+        }
+    }
     public  NodoLateral buscarNodo(String x) {
         NodoLateral temp=primero;
         while (temp!=null)
@@ -103,6 +129,16 @@ public class Lateral {
             temp = temp.siguiente;
         }
         return (new NodoLateral("-1"));
+    }
+    public NodoLateral devNodo(String x){
+        NodoLateral temp=primero;
+        while(temp!=null){
+            if(temp.nombre.equals(x)){
+                return temp;
+            }
+            temp = temp.siguiente;
+        }
+        return null;
     }
     void insertarAlFinal(NodoLateral nuevo) {
         ultimo.siguiente = nuevo;

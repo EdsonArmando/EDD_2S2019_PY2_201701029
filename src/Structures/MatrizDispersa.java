@@ -11,13 +11,11 @@ import Nodes.NodoLateral;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 /**
  *
  * @author EG
  */
 public class MatrizDispersa {
-
     public ListaVertical ver;
     public NodoCabecera temp1;
     public NodoLateral temp2;
@@ -51,7 +49,23 @@ public class MatrizDispersa {
         //cout << "Inserto" << color << "en" << x << " ," << y << endl;
         /*Se inserto el nodo*/
     }
-
+    public void Eliminar(String carpetaPadre, String padre){
+        NodoContenido aux=null;
+        NodoLateral temp=listlat.devNodo(carpetaPadre);
+       if(!temp.fila.esVacia()){
+            aux=temp.fila.primero;
+            while(aux!=null){
+                listlat.Eliminar(aux.rutax,"");
+                listaCab.Eliminar(aux.rutax,"");
+                aux = aux.derech;
+            }
+            listlat.Eliminar(carpetaPadre, padre);
+            listaCab.Eliminar(carpetaPadre, padre);
+       }else{
+           listlat.Eliminar(carpetaPadre, padre);
+           listaCab.Eliminar(carpetaPadre, padre);
+       }
+    }
     public NodoContenido returnNodoMatriz(String y, String x, String name) {
         NodoLateral temp = listlat.primero;
         NodoCabecera temp1 = listaCab.primero;
@@ -72,12 +86,11 @@ public class MatrizDispersa {
         NodoLateral temp = listlat.primero;
         NodoContenido temp1 = null;
         FileWriter file = new FileWriter("Grafo.dot");
-        file.write("graph {\n" +
-        "    rankdir=LR;\n");
+        file.write("digraph  {\n");
         while(temp!=null){
             temp1 = temp.fila.primero;
             file.write("\""+ temp.nombre+"\"");
-            file.write(" -- {");
+            file.write(" -> {");
             while(temp1!=null){
                 file.write(" \""+ temp1.rutax+"\" ");
                 temp1 = temp1.derech;

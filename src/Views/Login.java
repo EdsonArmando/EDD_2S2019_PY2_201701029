@@ -4,6 +4,7 @@ import Nodes.NodeAVL;
 import Nodes.NodeHash;
 import Nodes.NodoContenido;
 import Nodes.NodoLateral;
+import Structures.Bitacora;
 import Structures.TablaHash;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,7 @@ import javax.swing.JPanel;
 public class Login extends javax.swing.JFrame {
 
     public TablaHash tabla = new TablaHash();
+    Bitacora bitacora = new Bitacora();
     private File carpeta;
     private String subCarpeta = "/";
     private String username = "";
@@ -174,7 +176,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginActionPerformed
 
     public LinkedList<NodeAVL> listadoArchivos(NodoContenido listado) {
-        if(listado==null){
+        if (listado == null) {
             return null;
         }
         listado.avl.tempo.clear();
@@ -189,19 +191,20 @@ public class Login extends javax.swing.JFrame {
         MenuUsuario Menu = new MenuUsuario(this, hijo);
         NodeHash temporal = tabla.getNodeHash(username);
         NodoLateral lateral = temporal.matrix.listlat.buscarNodo(hijo);
-        
+
         NodoContenido nodoMatriz = temporal.matrix.returnNodoMatriz(padre, hijo, padre + "/" + hijo);
         carpetaPadre = hijo;
         Menu.idBienvenida.setText("Bienvenido al sistema " + username);
-        Menu.idDirectorio.setText(".." + padre  + hijo);
+        Menu.idDirectorio.setText(".." + padre + hijo);
         Menu.idMasivaUsuario.setVisible(false);
         Menu.idHash.setVisible(false);
+        Menu.idBitacora.setVisible(false);
         LinkedList<NodeAVL> listado = listadoArchivos(nodoMatriz);
         LinkedList<NodoContenido> carpetas = temporal.matrix.listlat.devList(hijo);
-        if(carpetas == null || carpetas.size() == 0){
-        
-        }else{
-                for (int i = 0; i < carpetas.size(); i++) {
+        if (carpetas == null || carpetas.size() == 0) {
+
+        } else {
+            for (int i = 0; i < carpetas.size(); i++) {
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(carpetas.get(i).rutax);
                 archivo.setName(carpetas.get(i).rutax);
@@ -320,13 +323,40 @@ public class Login extends javax.swing.JFrame {
                 Menu.panelFile.add(archivo);
             }
         }
+        Menu.idArchModificar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
+                    String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre");
+                    nodoMatriz.avl.Modificar(nodoMatriz.raiz, ruta, nuevoNombre);
+                    nodoMatriz.raiz = nodoMatriz.avl.NuevaRaiz();
+                    nodoMatriz.avl.raizNueva = null;
+                    bitacora.push(username, "Ha Modificado el archivo" + ruta);
+                    Menu.dispose();
+                    MenuUser(username, padre, hijo, carpeta);
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
         Menu.idEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String nombre = JOptionPane.showInputDialog("Ingres el nombre de la carpeta");
+                try {
+                    temporal.matrix.Eliminar(nombre, Menu.nombbre());
+                    bitacora.push(username, "Ha eliminado la carpeta " + nombre);
+                } catch (Exception s) {
+                }
 
             }
         });
-        Menu.idArchSubir.addActionListener((new ActionListener(){
+        Menu.idArchSubir.addActionListener((new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -339,7 +369,7 @@ public class Login extends javax.swing.JFrame {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        
+
         }));
         Menu.idMatriz.addActionListener(new ActionListener() {
             @Override
@@ -347,6 +377,7 @@ public class Login extends javax.swing.JFrame {
                 try {
                     temporal.matrix.graficarMatriz();
                     Runtime.getRuntime().exec("cmd /c matrix.png", null, new File(System.getProperty("user.dir")));
+                    bitacora.push(username, "Genero el reporte de la matriz");
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -361,8 +392,9 @@ public class Login extends javax.swing.JFrame {
                 nodoMatriz.avl.get(nodoMatriz.raiz, archivo);
                 NodeAVL tem = nodoMatriz.avl.getNode();
                 NodeHash temp = tabla.getNodeHash(nombreUser);
-                NodoContenido temp1 = temp.matrix.returnNodoMatriz("/", "home","");
+                NodoContenido temp1 = temp.matrix.returnNodoMatriz("/", "home", "");
                 temp1.raiz = temp1.avl.insert(temp1.raiz, tem.nombreArchivo, tem.contenido, false);
+                bitacora.push(username, "Compartio un archivo :" + nombreUser);
             }
         });
         Menu.idArchCrear.addActionListener(new ActionListener() {
@@ -370,6 +402,7 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
                 nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "", false);
+                bitacora.push(username, "Cero un Archivo :");
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(ruta);
                 archivo.setName(ruta);
@@ -431,6 +464,25 @@ public class Login extends javax.swing.JFrame {
                 Menu.panelFile.repaint();
             }
         });
+        Menu.idEliminarArch.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
+                    nodoMatriz.avl.Eliminar(nodoMatriz.raiz, ruta);
+                    nodoMatriz.raiz = nodoMatriz.avl.NuevaRaiz();
+                    nodoMatriz.avl.raizNueva = null;
+                    bitacora.push(username, "Ha borrado el archivo" + ruta);
+                    Menu.dispose();
+                    MenuUser(username, padre, hijo, carpeta);
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         Menu.idAvl.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -438,6 +490,7 @@ public class Login extends javax.swing.JFrame {
                     nodoMatriz.avl.graphAVL(nodoMatriz.raiz);
                     nodoMatriz.avl.importImage();
                     Runtime.getRuntime().exec("cmd /c avl.png", null, new File(System.getProperty("user.dir")));
+                    bitacora.push(username, "Genero reporte AVL");
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -447,12 +500,13 @@ public class Login extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ruta = JOptionPane.showInputDialog("Ingrese el nombre de la carpeta");
-                if(hijo.equals("/")){
+                if (hijo.equals("/")) {
                     temporal.matrix.insertar(hijo, ruta, hijo + ruta);
-                }else{
-                    temporal.matrix.insertar(hijo, ruta, hijo +"/"+ ruta);
+                } else {
+                    temporal.matrix.insertar(hijo, ruta, hijo + "/" + ruta);
                 }
                 temporal.matrix.insertar(ruta, "", "");
+                bitacora.push(username, "Creo la  carpeta " + ruta);
                 //No se insera en avl al carpeta solo matriz
                 //nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "", true);
                 JLabel archivo = new JLabel();
@@ -471,6 +525,7 @@ public class Login extends javax.swing.JFrame {
                             try {
                                 contClik = 0;
                                 MenuUser(username, Menu.nombbre(), nombreFile, carpeta);
+
                             } catch (IOException ex) {
                                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (InterruptedException ex) {
@@ -521,8 +576,21 @@ public class Login extends javax.swing.JFrame {
         });
         if (username.equals("admin")) {
             Menu.idHash.setVisible(true);
+            Menu.idBitacora.setVisible(true);
+            Menu.idBitacora.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        bitacora.graphBitacora();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            });
             Menu.idMasivaUsuario.setVisible(true);
-            Menu.idHash.addActionListener(new ActionListener(){
+            Menu.idHash.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -533,29 +601,35 @@ public class Login extends javax.swing.JFrame {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            
+
             });
+
             Menu.idMasivaUsuario.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     cargaMasiva(JOptionPane.showInputDialog("Ingrese la ruta de csv"), "usuarios");
                     JOptionPane.showMessageDialog(null, "Carga Masiva Exitosa");
+                    bitacora.push(username, "Realizo una carga Masiva Usuarios");
+                    tabla.modelo.addColumn("Usuario");
+                    tabla.modelo.addColumn("Error");
+                    tabla.reporte();
                 }
 
             });
         }
-        Menu.idGrafo.addActionListener(new ActionListener(){
+        Menu.idGrafo.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     temporal.matrix.graficarGrafo();
+                    bitacora.push(username, "Genero el reporte del grafo");
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        
+
         });
         Menu.idMasivaArch.addActionListener(new ActionListener() {
 
@@ -563,6 +637,7 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 String[] archivos = cargaMasiva(JOptionPane.showInputDialog("Ingrese la ruta"), "archivos");
                 archivos[0] = "";
+                bitacora.push(username, "Realizo una carga Masiva Archivos");
                 for (String line : archivos) {
                     if (line != "") {
                         String[] datos = line.split(",");
@@ -631,15 +706,17 @@ public class Login extends javax.swing.JFrame {
             }
 
         });
+
         Menu.setVisible(true);
         Menu.setLocationRelativeTo(null);
     }
 
     public void crearArchivo(NodeAVL file) throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter archivo = new PrintWriter(System.getProperty("user.dir")+ "\\" + file.nombreArchivo, "UTF-8");
+        PrintWriter archivo = new PrintWriter(System.getProperty("user.dir") + "\\" + file.nombreArchivo, "UTF-8");
         archivo.write(file.contenido);
         archivo.close();
     }
+
     public void crearCarpeta(String ruta, String username, File carpeta) {
         directorio = new File(carpeta.getAbsoluteFile() + "\\" + ruta);
         if (!directorio.exists()) {
