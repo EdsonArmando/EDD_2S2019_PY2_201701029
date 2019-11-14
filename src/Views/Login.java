@@ -25,9 +25,11 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -191,7 +193,6 @@ public class Login extends javax.swing.JFrame {
         MenuUsuario Menu = new MenuUsuario(this, hijo);
         NodeHash temporal = tabla.getNodeHash(username);
         NodoLateral lateral = temporal.matrix.listlat.buscarNodo(hijo);
-
         NodoContenido nodoMatriz = temporal.matrix.returnNodoMatriz(padre, hijo, padre + "/" + hijo);
         carpetaPadre = hijo;
         Menu.idBienvenida.setText("Bienvenido al sistema " + username);
@@ -323,6 +324,23 @@ public class Login extends javax.swing.JFrame {
                 Menu.panelFile.add(archivo);
             }
         }
+        Menu.idContenido.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
+                nodoMatriz.avl.get(nodoMatriz.raiz, ruta);
+                NodeAVL nuevo = nodoMatriz.avl.getNode();
+                JTextArea texto = new JTextArea();
+                texto.setBounds(10,10,150,150);
+                texto.setText(" "+nuevo.contenido);
+                JFrame temp = new JFrame(ruta);
+                temp.add(texto);
+                temp.setSize(200, 200);
+                temp.setLocationRelativeTo(null);
+                temp.setVisible(true);
+            }
+        });
         Menu.idArchModificar.addActionListener(new ActionListener() {
 
             @Override

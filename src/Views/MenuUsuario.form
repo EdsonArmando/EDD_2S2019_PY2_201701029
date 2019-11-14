@@ -175,11 +175,12 @@
                       <Component id="idArchCompartir" alignment="0" max="32767" attributes="0"/>
                       <Component id="idArchSubir" max="32767" attributes="0"/>
                       <Component id="idMasivaArch" alignment="1" max="32767" attributes="0"/>
+                      <Component id="idEliminarArch" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="idEliminarArch" max="32767" attributes="0"/>
+                      <Component id="idContenido" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -202,7 +203,9 @@
                   <Component id="idMasivaArch" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="idEliminarArch" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="idContenido" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -262,6 +265,14 @@
         <Component class="javax.swing.JButton" name="idEliminarArch">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="idContenido">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Contenido"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
