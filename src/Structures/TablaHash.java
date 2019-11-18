@@ -154,9 +154,11 @@ public class TablaHash {
                         conteoNodos += 1;
                     }
                 }else{
+                    JOptionPane.showMessageDialog(null, "El ususario ya existe");
                     tempo.add(new nodeBitacora(key,"El nombre de Usuario ya existe"));
                 }
             } else {
+                JOptionPane.showMessageDialog(null, "La contraseña debe ser mayor a 8 caracteres");
                 tempo.add(new nodeBitacora(key,"La contraseña debe ser mayor a 8 caracters"));
                 
             }

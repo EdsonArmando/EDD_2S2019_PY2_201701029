@@ -30,8 +30,8 @@ public class Registro1 extends java.awt.Dialog {
 
         jLabel1 = new javax.swing.JLabel();
         idUsername = new javax.swing.JTextField();
-        idPassword = new javax.swing.JTextField();
         Acept = new javax.swing.JButton();
+        idPassword = new javax.swing.JPasswordField();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -45,12 +45,14 @@ public class Registro1 extends java.awt.Dialog {
         jLabel1.setBounds(180, 50, 60, 16);
         add(idUsername);
         idUsername.setBounds(170, 100, 110, 24);
-        add(idPassword);
-        idPassword.setBounds(170, 150, 110, 24);
 
         Acept.setText("Aceptar");
         add(Acept);
         Acept.setBounds(170, 210, 110, 32);
+
+        idPassword.setText("jPasswordField1");
+        add(idPassword);
+        idPassword.setBounds(170, 160, 119, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -83,7 +85,7 @@ public class Registro1 extends java.awt.Dialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Acept;
-    public javax.swing.JTextField idPassword;
+    public javax.swing.JPasswordField idPassword;
     public javax.swing.JTextField idUsername;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

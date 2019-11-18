@@ -921,17 +921,13 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = nuevo.idUsername.getText();
                 String password = nuevo.idPassword.getText();
-                tabla.add(username, password);
-                directorio = new File(System.getProperty("user.dir") + "\\" + "raiz_" + username);
-                if (!directorio.exists()) {
-                    if (directorio.mkdirs()) {
-                        System.out.println("Directorio creado");
-                    } else {
-                        System.out.println("Error al crear directorio");
-                    }
+                if(password.length()>8){
+                    tabla.add(username, password);
+                }else{
+                    JOptionPane.showMessageDialog(null, "La contraseña debe ser mayor a 8 caracteres");
                 }
-                JOptionPane.showMessageDialog(null, "Bienvenido al sistema " + username);
                 nuevo.dispose();
+                tabla.reporte();
             }
         });
         nuevo.setLocationRelativeTo(this);
