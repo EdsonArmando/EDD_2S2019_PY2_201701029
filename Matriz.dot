@@ -2,60 +2,48 @@ digraph Grafica {
 node[shape=record,style=filled] 
 "RAIZ-1-1"[label ="{RAIZ}",group = 1]
  "Fila:/-1/"[label ="/" ,group = 1 ]
-"Fila:Unod-1Unod"[label ="Unod" ,group = 1 ]
-"Fila:Tres-1Tres"[label ="Tres" ,group = 1 ]
-"Fila:Mike-1Mike"[label ="Mike" ,group = 1 ]
+"Fila:Nuevo-1Nuevo"[label ="Nuevo" ,group = 1 ]
+"Fila:Dir5-1Dir5"[label ="Dir5" ,group = 1 ]
 "COL:/-1/"[label ="/" ,group =2]
 "COL:home-1home"[label ="home" ,group =3]
 "/home-home/"[label ="/home" ,group = 3 ]
-"COL:Unod-1Unod"[label ="Unod" ,group =4]
-"/Unod-Unod/"[label ="/Unod" ,group = 4 ]
-"COL:Tres-1Tres"[label ="Tres" ,group =5]
-"/Tres-Tres/"[label ="/Tres" ,group = 5 ]
-"COL:Mike-1Mike"[label ="Mike" ,group =6]
-"/Mike-Mike/"[label ="/Mike" ,group = 6 ]
+"COL:Nuevo-1Nuevo"[label ="Nuevo" ,group =4]
+"/Nuevo-Nuevo/"[label ="/Nuevo" ,group = 4 ]
+"COL:Dir5-1Dir5"[label ="Dir5" ,group =5]
+"/Dir5-Dir5/"[label ="/Dir5" ,group = 5 ]
 
 
-{rank = same;"Fila:/-1/";"/home-home/";"/Unod-Unod/";"/Tres-Tres/";"/Mike-Mike/";}
-{rank = same;"Fila:Unod-1Unod";}
-{rank = same;"Fila:Tres-1Tres";}
-{rank = same;"Fila:Mike-1Mike";}
-{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:Unod-1Unod";"COL:Tres-1Tres";"COL:Mike-1Mike";}
+{rank = same;"Fila:/-1/";"/home-home/";"/Nuevo-Nuevo/";"/Dir5-Dir5/";}
+{rank = same;"Fila:Nuevo-1Nuevo";}
+{rank = same;"Fila:Dir5-1Dir5";}
+{rank = same;"RAIZ-1-1";"COL:/-1/";"COL:home-1home";"COL:Nuevo-1Nuevo";"COL:Dir5-1Dir5";}
 
 
 "RAIZ-1-1" -> "Fila:/-1/"
 "RAIZ-1-1" -> "Fila:/-1/"[dir=back]
 "Fila:/-1/"->"/home-home/"
 "Fila:/-1/"->"/home-home/"[dir=back]
-"Fila:/-1/"->"Fila:Unod-1Unod"
-"Fila:/-1/"->"Fila:Unod-1Unod"[dir=back]
-"/home-home/"->"/Unod-Unod/"
-"/home-home/"->"/Unod-Unod/"[dir=back]
-"/Unod-Unod/"->"/Tres-Tres/"
-"/Unod-Unod/"->"/Tres-Tres/"[dir=back]
-"/Tres-Tres/"->"/Mike-Mike/"
-"/Tres-Tres/"->"/Mike-Mike/"[dir=back]
-"Fila:Unod-1Unod"->"Fila:Tres-1Tres"
-"Fila:Unod-1Unod"->"Fila:Tres-1Tres"[dir=back]
-"Fila:Tres-1Tres"->"Fila:Mike-1Mike"
-"Fila:Tres-1Tres"->"Fila:Mike-1Mike"[dir=back]
+"Fila:/-1/"->"Fila:Nuevo-1Nuevo"
+"Fila:/-1/"->"Fila:Nuevo-1Nuevo"[dir=back]
+"/home-home/"->"/Nuevo-Nuevo/"
+"/home-home/"->"/Nuevo-Nuevo/"[dir=back]
+"/Nuevo-Nuevo/"->"/Dir5-Dir5/"
+"/Nuevo-Nuevo/"->"/Dir5-Dir5/"[dir=back]
+"Fila:Nuevo-1Nuevo"->"Fila:Dir5-1Dir5"
+"Fila:Nuevo-1Nuevo"->"Fila:Dir5-1Dir5"[dir=back]
 "RAIZ-1-1" -> "COL:/-1/"
 "RAIZ-1-1" -> "COL:/-1/"[dir=back]
 "COL:/-1/"->"COL:home-1home"
 "COL:/-1/"->"COL:home-1home"[dir=back]
 "COL:home-1home"->"/home-home/"
 "COL:home-1home"->"/home-home/"[dir=back]
-"COL:home-1home"->"COL:Unod-1Unod"
-"COL:home-1home"->"COL:Unod-1Unod"[dir=back]
-"COL:Unod-1Unod"->"/Unod-Unod/"
-"COL:Unod-1Unod"->"/Unod-Unod/"[dir=back]
-"COL:Unod-1Unod"->"COL:Tres-1Tres"
-"COL:Unod-1Unod"->"COL:Tres-1Tres"[dir=back]
-"COL:Tres-1Tres"->"/Tres-Tres/"
-"COL:Tres-1Tres"->"/Tres-Tres/"[dir=back]
-"COL:Tres-1Tres"->"COL:Mike-1Mike"
-"COL:Tres-1Tres"->"COL:Mike-1Mike"[dir=back]
-"COL:Mike-1Mike"->"/Mike-Mike/"
-"COL:Mike-1Mike"->"/Mike-Mike/"[dir=back]
+"COL:home-1home"->"COL:Nuevo-1Nuevo"
+"COL:home-1home"->"COL:Nuevo-1Nuevo"[dir=back]
+"COL:Nuevo-1Nuevo"->"/Nuevo-Nuevo/"
+"COL:Nuevo-1Nuevo"->"/Nuevo-Nuevo/"[dir=back]
+"COL:Nuevo-1Nuevo"->"COL:Dir5-1Dir5"
+"COL:Nuevo-1Nuevo"->"COL:Dir5-1Dir5"[dir=back]
+"COL:Dir5-1Dir5"->"/Dir5-Dir5/"
+"COL:Dir5-1Dir5"->"/Dir5-Dir5/"[dir=back]
 
 }

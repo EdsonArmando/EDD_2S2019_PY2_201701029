@@ -49,15 +49,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="label1" pref="148" max="32767" attributes="0"/>
-                          <Component id="idUsername" alignment="0" max="32767" attributes="0"/>
-                          <Component id="idPassword" alignment="0" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="Login" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Registrar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="idPassword" alignment="0" max="32767" attributes="0"/>
+                          <Component id="label1" alignment="0" pref="148" max="32767" attributes="0"/>
+                          <Component id="idUsername" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="88" max="32767" attributes="0"/>
@@ -73,7 +73,7 @@
                   <Component id="idUsername" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="idPassword" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Login" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Registrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -104,12 +104,6 @@
             <Property name="text" type="java.lang.String" value="username"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="idPassword">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="password"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="Registrar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Registrar"/>
@@ -117,6 +111,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistrarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="idPassword">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

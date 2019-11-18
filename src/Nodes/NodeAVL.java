@@ -5,6 +5,8 @@
  */
 package Nodes;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,10 +23,15 @@ public class NodeAVL {
     public NodeAVL izquierda;
     public NodeAVL derecha;
     public boolean ieCarpeta;
-    public NodeAVL(String key,String contenido, boolean esCarpeta){
+    public String fech;
+    DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    public NodeAVL(String key,String contenido, boolean esCarpeta, String propietario){
         this.nombreArchivo = key;
+        this.propietario = propietario;
         this.ieCarpeta = esCarpeta;
         this.contenido = contenido;
+        fecha = new Date();
+        this.fech = hourdateFormat.format(fecha);
         this.alt = 1;
     }
 }

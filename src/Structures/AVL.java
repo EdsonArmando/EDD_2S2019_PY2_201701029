@@ -47,6 +47,19 @@ public class AVL {
             return 0; 
         return alt(N.izquierda) - alt(N.derecha); 
     } 
+    public boolean existe(NodeAVL raiz,String info) {
+        NodeAVL reco = raiz;
+        while (reco != null) {
+            if (info.equals(reco.nombreArchivo)) {
+                return true;
+            } else if (retornInt(info) > retornInt(reco.nombreArchivo)) {
+                reco = reco.derecha;
+            } else {
+                reco = reco.izquierda;
+            }
+        }
+        return false;
+    }
     NodeAVL derechaRotate(NodeAVL y) { 
         NodeAVL x = y.izquierda; 
         NodeAVL T2 = x.derecha; 
@@ -77,15 +90,16 @@ public class AVL {
         }
         return node.alt;
     }
-    public NodeAVL insert(NodeAVL node, String key, String contenido, boolean esCarpeta) { 
+    public NodeAVL insert(NodeAVL node, String key, String contenido, boolean esCarpeta, String propietario) {
+        
         /* 1.  Perform the normal BST insertion */
         if (node == null) 
-            return (new NodeAVL(key,contenido,esCarpeta)); 
+            return (new NodeAVL(key,contenido,esCarpeta,propietario)); 
   
         if (retornInt(key) < retornInt(node.nombreArchivo)) 
-            node.izquierda = insert(node.izquierda, key,contenido,esCarpeta); 
+            node.izquierda = insert(node.izquierda, key,contenido,esCarpeta,propietario); 
         else if (retornInt(key) > retornInt(node.nombreArchivo)) 
-            node.derecha = insert(node.derecha, key,contenido,esCarpeta); 
+            node.derecha = insert(node.derecha, key,contenido,esCarpeta,propietario); 
         else // Duplicate keys not allowed 
             return node; 
         /* 2. Update height of this ancestor node */
@@ -140,7 +154,7 @@ public class AVL {
             if(root.nombreArchivo.equals(nombre)){
                
             }else{
-                raizNueva = insert(raizNueva,root.nombreArchivo,root.contenido,root.ieCarpeta);
+                raizNueva = insert(raizNueva,root.nombreArchivo,root.contenido,root.ieCarpeta,root.propietario);
             }
             Eliminar(root.izquierda,nombre);
             Eliminar(root.derecha,nombre);
@@ -150,12 +164,24 @@ public class AVL {
         if(root!=null){
             if(root.nombreArchivo.equals(nombre)){
                 
-               raizNueva = insert(raizNueva,nombreNuevo,root.contenido,root.ieCarpeta);
+               raizNueva = insert(raizNueva,nombreNuevo,root.contenido,root.ieCarpeta,root.propietario);
             }else{
-                raizNueva = insert(raizNueva,root.nombreArchivo,root.contenido,root.ieCarpeta);
+                raizNueva = insert(raizNueva,root.nombreArchivo,root.contenido,root.ieCarpeta,root.propietario);
             }
             Modificar(root.izquierda,nombre, nombreNuevo);
             Modificar(root.derecha,nombre,nombreNuevo);
+        }
+    }
+    public void Sobreescribir( NodeAVL root,String nombre, String nombreNuevo, String contenido){
+        if(root!=null){
+            if(root.nombreArchivo.equals(nombre)){
+                
+               raizNueva = insert(raizNueva,nombreNuevo,contenido,root.ieCarpeta,root.propietario);
+            }else{
+                raizNueva = insert(raizNueva,root.nombreArchivo,root.contenido,root.ieCarpeta,root.propietario);
+            }
+            Sobreescribir(root.izquierda,nombre, nombreNuevo,contenido);
+            Sobreescribir(root.derecha,nombre,nombreNuevo,contenido);
         }
     }
     public NodeAVL  NuevaRaiz(){
@@ -193,7 +219,7 @@ public class AVL {
     public void graphAVL(NodeAVL root){
         
         if (root != null){
-            String data = "Carne: "+String.valueOf(root.nombreArchivo)+"\\n"+" Nombre: " + root.nombreArchivo +"\\n"+" ALT: " + String.valueOf(root.alt)+"\\n"+" Contenido: " + String.valueOf(root.contenido);
+            String data = "Titulo: "+String.valueOf(root.nombreArchivo)+"\\n"+" Propietario: " + root.propietario +"\\n"+" ALT: " + String.valueOf(root.alt)+"\\n"+" Contenido: " + String.valueOf(root.contenido)+"\\n"+" Fecha: " + String.valueOf(root.fech);
             nodes +="\"nodo" + String.valueOf(root.nombreArchivo) + "\" " + "[ label = \"<C0>|"+data+"|<C1>\"];\n";
             if(root.izquierda != null){
                 rela += "\"nodo" + String.valueOf(root.nombreArchivo) + "\":C0->" + "\"nodo" + String.valueOf(root.izquierda.nombreArchivo) + "\"\n";

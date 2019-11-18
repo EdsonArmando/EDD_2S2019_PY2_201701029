@@ -7,10 +7,12 @@ import Nodes.NodoLateral;
 import Structures.Bitacora;
 import Structures.TablaHash;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,8 +74,8 @@ public class Login extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         Login = new javax.swing.JButton();
         idUsername = new javax.swing.JTextField();
-        idPassword = new javax.swing.JTextField();
         Registrar = new javax.swing.JButton();
+        idPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,15 +92,14 @@ public class Login extends javax.swing.JFrame {
         idUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         idUsername.setText("username");
 
-        idPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idPassword.setText("password");
-
         Registrar.setText("Registrar");
         Registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistrarActionPerformed(evt);
             }
         });
+
+        idPassword.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,14 +108,14 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                        .addComponent(idUsername)
-                        .addComponent(idPassword))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Login)
                         .addGap(18, 18, 18)
-                        .addComponent(Registrar)))
+                        .addComponent(Registrar))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(idPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                        .addComponent(idUsername, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -125,7 +127,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(idUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(idPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Login)
                     .addComponent(Registrar))
@@ -162,7 +164,12 @@ public class Login extends javax.swing.JFrame {
          }*/
         username = idUsername.getText();
         String password = idPassword.getText();
-        boolean log = tabla.Login(username, password);
+        boolean log=true;
+        try {
+            log = tabla.Login(username, password);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (log) {
             try {
                 carpeta = new File(System.getProperty("user.dir") + "\\raiz_" + username);
@@ -380,6 +387,7 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String nombre = JOptionPane.showInputDialog("Ingres el nombre del archivo");
+                    bitacora.push(username, "Creo la carptea"+ nombre);
                     nodoMatriz.avl.descargarArchivo(nodoMatriz.raiz, nombre);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -395,6 +403,7 @@ public class Login extends javax.swing.JFrame {
                 try {
                     temporal.matrix.graficarMatriz();
                     Runtime.getRuntime().exec("cmd /c matrix.png", null, new File(System.getProperty("user.dir")));
+                    jframeReporte("matrix");
                     bitacora.push(username, "Genero el reporte de la matriz");
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -411,7 +420,7 @@ public class Login extends javax.swing.JFrame {
                 NodeAVL tem = nodoMatriz.avl.getNode();
                 NodeHash temp = tabla.getNodeHash(nombreUser);
                 NodoContenido temp1 = temp.matrix.returnNodoMatriz("/", "home", "");
-                temp1.raiz = temp1.avl.insert(temp1.raiz, tem.nombreArchivo, tem.contenido, false);
+                temp1.raiz = temp1.avl.insert(temp1.raiz, tem.nombreArchivo, tem.contenido, false,username);
                 bitacora.push(username, "Compartio un archivo :" + nombreUser);
             }
         });
@@ -419,7 +428,19 @@ public class Login extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ruta = JOptionPane.showInputDialog("Ingrese el nombre del Archivo");
-                nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, "", false);
+                String contenido = JOptionPane.showInputDialog("Ingrese el contenido del Archivo");
+                boolean existe = nodoMatriz.avl.existe(nodoMatriz.raiz, ruta);
+                if(existe == true){
+                    int dialogResult = JOptionPane.showConfirmDialog (null, "Desea sobreescribir el archivo");
+                    if(dialogResult == JOptionPane.YES_OPTION){
+                        nodoMatriz.avl.Sobreescribir(nodoMatriz.raiz, ruta, ruta,contenido);
+                        nodoMatriz.raiz = nodoMatriz.avl.NuevaRaiz();
+                        nodoMatriz.avl.raizNueva = null;
+                    }
+                    
+                }else{
+                    nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, ruta, contenido, false,username);
+                }                     
                 bitacora.push(username, "Cero un Archivo :");
                 JLabel archivo = new JLabel();
                 archivo.setToolTipText(ruta);
@@ -508,6 +529,7 @@ public class Login extends javax.swing.JFrame {
                     nodoMatriz.avl.graphAVL(nodoMatriz.raiz);
                     nodoMatriz.avl.importImage();
                     Runtime.getRuntime().exec("cmd /c avl.png", null, new File(System.getProperty("user.dir")));
+                    jframeReporte("Hash");
                     bitacora.push(username, "Genero reporte AVL");
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -615,6 +637,7 @@ public class Login extends javax.swing.JFrame {
                     try {
                         tabla.graphTable();
                         Runtime.getRuntime().exec("cmd /c Hash.png", null, new File(System.getProperty("user.dir")));
+                        jframeReporte("Hash");
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -643,6 +666,8 @@ public class Login extends javax.swing.JFrame {
                 try {
                     temporal.matrix.graficarGrafo();
                     bitacora.push(username, "Genero el reporte del grafo");
+                    jframeReporte("grafo");
+                    Runtime.getRuntime().exec("cmd /c grafo.png", null, new File(System.getProperty("user.dir")));
                 } catch (IOException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -659,7 +684,7 @@ public class Login extends javax.swing.JFrame {
                 for (String line : archivos) {
                     if (line != "") {
                         String[] datos = line.split(",");
-                        nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, datos[0], datos[1], false);
+                        nodoMatriz.raiz = nodoMatriz.avl.insert(nodoMatriz.raiz, datos[0], datos[1], false,username);
                         JLabel archivo = new JLabel();
                         archivo.setToolTipText(datos[0]);
                         archivo.setName(datos[0]);
@@ -843,7 +868,16 @@ public class Login extends javax.swing.JFrame {
         }
         return archivo;
     }
-
+    public void jframeReporte(String ruta){
+        JFrame nuevo = new JFrame();
+        JLabel jLabel1 = new JLabel();
+        ImageIcon fot = new ImageIcon(System.getProperty("user.dir")+"\\"+ruta+".png");
+        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(700, 700, Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icono);
+        nuevo.setSize(500,500);
+        nuevo.add(jLabel1);
+        nuevo.setVisible(true);
+    }
     public String[] cargaMasiva(String ruta, String tipo) {
         String texto = "";
         String aux = "";
@@ -944,7 +978,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
     private javax.swing.JButton Registrar;
-    private javax.swing.JTextField idPassword;
+    private javax.swing.JPasswordField idPassword;
     private javax.swing.JTextField idUsername;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;

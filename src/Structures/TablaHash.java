@@ -11,7 +11,13 @@ import Nodes.nodeBitacora;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -23,8 +29,8 @@ import javax.swing.table.DefaultTableModel;
  * @author EG
  */
 public class TablaHash {
-    public static DefaultTableModel modelo = new DefaultTableModel();
-    JFrame f = new JFrame();
+    public  DefaultTableModel modelo = new DefaultTableModel();
+    
     private int conteoNodos = 0;
     /*Tamaño del arreglo a utilizar en la tabla Hash*/
     private int size = 7;
@@ -32,7 +38,7 @@ public class TablaHash {
      Arreglo que se utilizara para la tabla hash
      */
     private NodeHash[] entries = new NodeHash[500];
-
+    public LinkedList<nodeBitacora> tempo = new LinkedList<>();
     //Metodo para buscar un valor dentor de la tabla Hash
 
     public Integer buscar() {
@@ -91,65 +97,86 @@ public class TablaHash {
         }
         return false;
     }
-
+    /*
+    Retorna el hash
+    */
+    public String sha256(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = null;
+	try {
+		md = MessageDigest.getInstance("SHA-256");
+	} 
+	catch (NoSuchAlgorithmException e) {		
+		e.printStackTrace();
+		return null;
+	}
+	    
+	byte[] hash = md.digest(password.getBytes());
+	StringBuffer sb = new StringBuffer();
+	    
+	for(byte b : hash) {        
+		sb.append(String.format("%02x", b));
+	}
+	    
+	return sb.toString();
+    }
     /*
      Agregar nuevo elemento a la tabla Hash
      */
     public void add(String key, String value) {
-        if (value.length() > 8) {
-            if (!estaUsuario(key)) {
-                if (porcentaje() > 75) {
-                    Boolean esPrimo = false;
-                    int numero = this.size;
-                    while (esPrimo == false) {
-                        numero++;
-                        esPrimo = aumentar(numero);
+        try {
+            value = sha256(value);
+            if (value.length() > 8) {
+                if (!estaUsuario(key)) {
+                    if (porcentaje() > 75) {
+                        Boolean esPrimo = false;
+                        int numero = this.size;
+                        while (esPrimo == false) {
+                            numero++;
+                            esPrimo = aumentar(numero);
+                        }
+                        this.size = numero;
+                        NodeHash[] nueva = reubicarNodos(null);
+                        entries = nueva;
                     }
-                    this.size = numero;
-                    NodeHash[] nueva = reubicarNodos(null);
-                    entries = nueva;
+                    int indice = hashMejor(key);
+                    final NodeHash hashEntry = new NodeHash(key, value, indice);
+                    hashEntry.matrix.insertar("", "/", "");
+                    hashEntry.matrix.insertar("/", "home", "/home");
+                    if (entries[indice] == null) {
+                        entries[indice] = hashEntry;
+                        conteoNodos += 1;
+                    } /*
+                    En caso que exista una colision
+                    */ else {
+                        System.out.println("Existio una colision: " + key);
+                        NodeHash temp = entries[indice];
+                        temp.list.AddNode(hashEntry);
+                        conteoNodos += 1;
+                    }
+                }else{
+                    tempo.add(new nodeBitacora(key,"El nombre de Usuario ya existe"));
                 }
-                int indice = hashMejor(key);
-                final NodeHash hashEntry = new NodeHash(key, value, indice);
-                hashEntry.matrix.insertar("", "/", "");
-                hashEntry.matrix.insertar("/", "home", "/home");
-                if (entries[indice] == null) {
-                    entries[indice] = hashEntry;
-                    conteoNodos += 1;
-                } /*
-                 En caso que exista una colision
-                 */ else {
-                    System.out.println("Existio una colision: " + key);
-                    NodeHash temp = entries[indice];
-                    temp.list.AddNode(hashEntry);
-                    conteoNodos += 1;
-                }
-            }else{
-                Object[] fila=new Object[2];
-                fila[0] = key;
-                fila[1] = "El nombre de usuario ya existe";
-                modelo.addRow(fila);
+            } else {
+                tempo.add(new nodeBitacora(key,"La contraseña debe ser mayor a 8 caracters"));
+                
             }
-        } else {
-            Object[] fila=new Object[2];
-                fila[0] = key;
-                fila[1] = "La contraseña debe ser mayor a 8 caracters";
-                modelo.addRow(fila);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(TablaHash.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /*
      Metodo utilizado por el Login
      */
 
-    public boolean Login(String username, String password) {
+    public boolean Login(String username, String password) throws NoSuchAlgorithmException {
         int indice = hashMejor(username);
         NodeHash temp = entries[indice];
         if (temp != null) {
-            if (temp.nombreUsuario.equals(username) && temp.contrasenia.equals(password)) {
+            if (temp.nombreUsuario.equals(username) && temp.contrasenia.equals(sha256(password))) {
                 return true;
 
             } else {
-                return temp.list.login(username, password);
+                return temp.list.login(username, sha256(password));
             }
         }
         return false;
@@ -209,7 +236,7 @@ public class TablaHash {
 
         for (NodeHash item : entries) {
             if (item != null) {
-                file.write("node_" + String.valueOf(item.indice) + "[label = \"{<n>" + item.nombreUsuario + "|" + item.contrasenia + "|" + "<p> }\"];" + "\n");
+                file.write("node_" + String.valueOf(item.indice) + "[label = \"{<n>" + item.nombreUsuario + "|" + item.contrasenia.substring(5,25) + "|" + "<p> }\"];" + "\n");
                 file.write("node0:f" + String.valueOf(item.indice) + " -> node_" + String.valueOf(item.indice) + ":n;\n");
                 if (item.list.esVacia()) {
                     System.err.println("El nodo: " + item.nombreUsuario + "no tiene una lista con elementos");
@@ -230,10 +257,17 @@ public class TablaHash {
      Retorna una tabla con los erres al momento de ingresr usuarios
     */
     public void reporte(){
-
+        JFrame f = new JFrame();
         JTable jt = new JTable(modelo);
         jt.setBounds(30, 40, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
+        
+        for(nodeBitacora item : tempo){
+            Object[] fila=new Object[2];
+            fila[0] = item.nombreUser;
+            fila[1] = item.accion;
+            modelo.addRow(fila);
+        }
         f.add(sp);
         f.setSize(600, 600);
         f.setVisible(true);
