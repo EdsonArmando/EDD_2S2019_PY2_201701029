@@ -1,4 +1,4 @@
-Universidad de San Carlos de Guatemala
+#Universidad de San Carlos de Guatemala
 Estructuras de datos
 EDD_2S2019_PY2_201701029
 developer: Edson Guix Manuel
